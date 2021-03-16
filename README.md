@@ -5,3 +5,5 @@ come on now dawg
 not the damn dawg man
 
 aight
+
+krut cobain
