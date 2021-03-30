@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="res/style/style.css">
     
-    <title>Arsebko</title>
+    <title>Arsebko - Business ideas and more</title>
 </head>
 
 <body>
