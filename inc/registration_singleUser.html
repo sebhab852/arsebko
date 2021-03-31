@@ -1,0 +1,69 @@
+<div class="container-fluid m-4 px-4">
+
+    <form class="text-center border border-light p-5 bg-logindiv" action="index.php?menu=register" method="POST">
+
+        <p class="h4 mb-4 bg1">Sign up</p>
+
+        <div class="row mb-4">
+
+            <div class="col">
+                <!-- First name -->
+                <input type="text" id="defaultRegisterFormFirstName" class="form-control" name="fname" placeholder="Vorname" required>
+            </div>
+            <div class="col">
+                <!-- Last name -->
+                <input type="text" id="defaultRegisterFormLastName" class="form-control" name="lname" placeholder="Nachname" required>
+            </div>
+            <div class="col">
+                <!-- firma -->
+                <input type="text" id="defaultRegisterFormFirma" class="form-control" name="firma" placeholder="Firma (optional)">
+            </div>
+        </div>
+        
+        <!--adresse-->
+        <div class="row mb-4">
+            <div class="col">
+                <input type="text" id="" class="form-control" name="adress" placeholder="Straße und Hausnummer" required>
+            </div>
+            <div class="col">
+                <input type="number" id="" class="form-control" name="plz" placeholder="PLZ" min="1000" max="9999" required>
+            </div>
+            <div class="col">
+                <input type="text" id="" class="form-control" name="ort" placeholder="Ort" required>
+            </div>
+        </div>
+        
+        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" name="email" placeholder="E-mail" required>
+        
+        <input type="text" id="" class="form-control mb-4" name="username" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+
+        <!-- Password -->
+        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="password" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+
+        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordrep" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+        
+        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+            <p>A <b> lowercase </b> letter, a <b>capital (uppercase)</b> letter and a <b>number</b>.  Minimum <b>8 characters</b></p>
+            <p>Bitte nehmen Sie nicht "passwort" als Passwort.</p>
+        </small>
+        
+        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+            Sie haben bereits ein Konto? Melden Sie sich <a href="index.php?menu=login">hier</a> an.
+        </small>
+
+
+        <!-- Sign up button -->
+        <div class="row mt-2">
+            <small>
+                <button class="btn btn-info ml-4" type="submit">Sign Up</button>
+                <button class="btn btn-danger mr-4" type="reset">Reset</button>
+            </small>
+        </div>
+
+
+
+    </form>
+
+    
+</div>
+

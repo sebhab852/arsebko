@@ -32,6 +32,8 @@
             </div>
         </div>
     
+        <?php include "inc/registration_business.html"; ?>
+        
 
         
 
