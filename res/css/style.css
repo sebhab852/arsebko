@@ -1,5 +1,5 @@
 #myCarousel {
-    background-color: lightgrey;
+    background-color: white;
     position: relative;
     height: 30rem;
 }
@@ -18,4 +18,23 @@ body {
 
 .bg-logindiv {
     background: linear-gradient(to right, rgba(49,197,223,0.2), rgba(201,201,201,0.3)) !important;
+}
+
+
+#crsl-1 {
+    background-color: white;
+    background-image: url("res/img/slide_img_1.jpg");
+    background-position: 50% 50%;
+}
+
+
+#crsl-2 {
+    background-image: url("res/img/slide_img_2.jpg");
+    background-position: 50% 50%;
+}
+
+
+#crsl-3 {
+    background-image: url("res/img/slide_img_3.jpg");
+    background-position: 50% 50%;
 }

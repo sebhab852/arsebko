@@ -22,14 +22,45 @@
     
     <body>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <!-- <li data-target="#myCarousel" data-slide-to="0" class="active">
+                </li>
+
+                <li data-target="#myCarousel" data-slide-to="1">
+                </li>
+
+                <li data-target="#myCarousel" data-slide-to="2">
+                </li> -->
+            </ol>
+        
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div id="crsl-1" class="carousel-item active">
                     <div id="crsl-container" class="container">
                         <h1>title 1</h1>
                         <p>paragraph 1</p>
                     </div>
                 </div>
+
+                <div id="crsl-2" class="carousel-item">
+                    <div id="crsl-container">
+                    </div>
+                </div>
+
+                <div id="crsl-3" class="carousel-item">
+                    <div id="crsl-container">
+                    </div>
+                </div>
             </div>
+
+            <a href="#myCarousel" class="carousel-control-prev" role="button" data-slide="prev">
+                <span class="sr-only"></span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+
+            <a href="#myCarousel" class="carousel-control-next" role="button" data-slide="next">
+                <span class="sr-only"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
         </div>
     
         <?php include "inc/registration_business.html"; ?>
