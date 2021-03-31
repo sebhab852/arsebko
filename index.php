@@ -22,32 +22,36 @@
     
     <body>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <!-- <li data-target="#myCarousel" data-slide-to="0" class="active">
+            <!-- <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active">
                 </li>
 
                 <li data-target="#myCarousel" data-slide-to="1">
                 </li>
 
                 <li data-target="#myCarousel" data-slide-to="2">
-                </li> -->
-            </ol>
+                </li>
+            </ol> -->
         
             <div class="carousel-inner">
-                <div id="crsl-1" class="carousel-item active">
+                <div id="crsl-img-1" class="carousel-item active">
                     <div id="crsl-container" class="container">
                         <h1>title 1</h1>
                         <p>paragraph 1</p>
                     </div>
                 </div>
 
-                <div id="crsl-2" class="carousel-item">
-                    <div id="crsl-container">
+                <div id="crsl-img-2" class="carousel-item">
+                    <div id="crsl-container" class="container">
+                        <h1>title 2</h1>
+                        <p>paragraph 2</p>
                     </div>
                 </div>
 
-                <div id="crsl-3" class="carousel-item">
-                    <div id="crsl-container">
+                <div id="crsl-img-3" class="carousel-item">
+                    <div id="crsl-container" class="container">
+                        <h1>title 3</h1>
+                        <p>paragraph 3</p>
                     </div>
                 </div>
             </div>

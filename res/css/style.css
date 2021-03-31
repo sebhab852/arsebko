@@ -1,5 +1,5 @@
 #myCarousel {
-    background-color: white;
+    background-color: lightgrey;
     position: relative;
     height: 30rem;
 }
@@ -21,20 +21,22 @@ body {
 }
 
 
-#crsl-1 {
-    background-color: white;
+#crsl-img-1 {
     background-image: url("res/img/slide_img_1.jpg");
-    background-position: 50% 50%;
+    background-position: center;
+    background-size: cover;
 }
 
 
-#crsl-2 {
+#crsl-img-2 {
     background-image: url("res/img/slide_img_2.jpg");
-    background-position: 50% 50%;
+    background-position: center;
+    background-size: cover;
 }
 
 
-#crsl-3 {
+#crsl-img-3 {
     background-image: url("res/img/slide_img_3.jpg");
-    background-position: 50% 50%;
+    background-position: center;
+    background-size: cover;
 }
