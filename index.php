@@ -13,7 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         
-        <link rel="stylesheet" type="text/css" href="res/style/style.css">
+        <link rel="stylesheet" type="text/css" href="res/css/style.css">
         <script src="client/controller.js"></script>
         
         <title>Arsebko - Business ideas and more</title>
@@ -21,6 +21,18 @@
 
     
     <body>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div id="crsl-container" class="container">
+                        <h1>title 1</h1>
+                        <p>paragraph 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
         
 
 
@@ -30,7 +42,8 @@
 
 
 
-
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     </body>
 
 </html>
