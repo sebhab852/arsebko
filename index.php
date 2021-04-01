@@ -36,22 +36,22 @@
             <div class="carousel-inner">
                 <div id="crsl-img-1" class="carousel-item active">
                     <div id="crsl-container" class="container">
-                        <h1>title 1</h1>
-                        <p>paragraph 1</p>
+                        <h1 class="crsl-title">Communication</h1>
+                        <p class="crsl-text">Get in contact with businesses from all over the world.</p>
                     </div>
                 </div>
 
                 <div id="crsl-img-2" class="carousel-item">
                     <div id="crsl-container" class="container">
-                        <h1>title 2</h1>
-                        <p>paragraph 2</p>
+                        <h1 class="crsl-title">Unity</h1>
+                        <p class="crsl-text">Start working with other corporations.</p>
                     </div>
                 </div>
 
                 <div id="crsl-img-3" class="carousel-item">
                     <div id="crsl-container" class="container">
-                        <h1>title 3</h1>
-                        <p>paragraph 3</p>
+                        <h1 class="crsl-title">Ideas</h1>
+                        <p class="crsl-text">Inspire yourself.</p>
                     </div>
                 </div>
             </div>
