@@ -97,7 +97,7 @@
                             <div id="crsl-img-1" class="carousel-item active">
                                 <div id="crsl-container" class="container">
                                     <h1 class="crsl-title">Kommunikation</h1>
-                                    <p class="crsl-text">Bauen Sie Kontakt zu Unternehmen auf der ganzen Welt auf.</p>
+                                    <p class="crsl-text">Seien Sie Kontakt mit Unternehmen auf der ganzen Welt auf.</p>
                                 </div>
                             </div>
             
