@@ -1,7 +1,7 @@
 #myCarousel {
     background-color: lightgrey;
     position: relative;
-    height: 26.5rem;
+    padding-top: 56px;
 }
 
 
@@ -51,4 +51,9 @@ body {
 .crsl-text {
     color: white;
     font-size: 20px;
+}
+
+
+.navbar-brand {
+    padding-left: 30px;
 }
