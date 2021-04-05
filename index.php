@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="res/css/style.css">
         <script src="client/controller.js"></script>
         
-        <title>Arsebko - Business ideas and more</title>
+        <title>Arsebko | Business Ideas and more</title>
     </head>
 
     
