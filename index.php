@@ -32,11 +32,11 @@
                 <div class="collapse navbar-collapse" id="menüleiste">
                     <ul class="navbar-nav mr-auto">
                         <!-- <li class="nav-item active"> -->
-                        <li class="nav-item">
+                        <li class="nav-item px-2">
                             <a class="nav-link" href="index.php?page=login">Login</a>
                         </li>
 
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown px-2">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registrieren</a>
                         
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,15 +45,15 @@
                             </div>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item px-2">
                             <a class="nav-link" href="index.php?page=help">Hilfe</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item px-2">
                             <a class="nav-link" href="index.php?page=yourdata">Datenschutzinformationen</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item px-2">
                             <a class="nav-link" href="index.php?page=about">Impressum</a>
                         </li>
                     </ul>
