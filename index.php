@@ -19,47 +19,11 @@
         <title>Arsebko | Business Ideas and more</title>
     </head>
 
-    
+    <?php
+        include "inc/navbar.html";
+    ?>
     <body>
-        <div class="navigationsleiste">
-            <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-                <strong><a class="navbar-brand" href="index.php">Arsebko</a></strong>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menüleiste">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="menüleiste">
-                    <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item active"> -->
-                        <li class="nav-item px-2">
-                            <a class="nav-link" href="index.php?page=login">Login</a>
-                        </li>
-
-                        <li class="nav-item dropdown px-2">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registrieren</a>
-                        
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="index.php?page=registeruser">Neues Benutzerkonto anlegen</a>
-                                <a class="dropdown-item" href="index.php?page=registercorp">Neues Firmenkonto anlegen</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item px-2">
-                            <a class="nav-link" href="index.php?page=help">Hilfe</a>
-                        </li>
-
-                        <li class="nav-item px-2">
-                            <a class="nav-link" href="index.php?page=yourdata">Datenschutzinformationen</a>
-                        </li>
-
-                        <li class="nav-item px-2">
-                            <a class="nav-link" href="index.php?page=about">Impressum</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        
         
         <section id="homepage">
             <?php
@@ -143,4 +107,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     </body>
+    <footer>
+        <?php
+            include "inc/footer.html";        
+        ?>
+    </footer>    
 </html>

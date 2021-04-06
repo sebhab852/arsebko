@@ -87,3 +87,32 @@ body {
 .navbar-toggler {
     margin-right: 20px;
 }
+
+.navbar-brand::after{
+    content: "|";
+    position: absolute;
+    top: 10px;
+    margin-left: 10px;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    
+}
+
+#arsebko_logo_footer{
+    height: 65px;
+    width: 65px;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: -5px;
+
+}
+
+.copyright{
+    margin-right: 20px;
+}
+
