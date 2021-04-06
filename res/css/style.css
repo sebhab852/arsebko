@@ -82,3 +82,8 @@ body {
     padding: 15px;
     height: 200px;
 }
+
+
+.navbar-toggler {
+    margin-right: 20px;
+}
