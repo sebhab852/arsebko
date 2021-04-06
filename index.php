@@ -60,7 +60,7 @@
                 </div>
             </nav>
         </div>
-
+        
         <section id="homepage">
             <?php
                 if(isset($_GET['page'])) {
@@ -86,8 +86,9 @@
                         break;
 
                         case 'about':
-                            include "inc/about.php";
+                            include "inc/about.html";
                         break;
+
                     }
                 }
                 else {

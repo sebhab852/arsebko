@@ -72,3 +72,13 @@ body {
 #register-user {
     padding-top: 100px;
 }
+
+#about {
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+#about_img {
+    padding: 15px;
+    height: 200px;
+}
