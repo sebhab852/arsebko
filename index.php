@@ -26,44 +26,6 @@
             include "inc/navbar.html";
         
     
-                if(isset($_GET['page'])) {
-                    switch($_GET['page']) {
-                        case 'login':
-                            include "inc/login.html";
-                        break;
-
-                        case 'registeruser':
-                            include "inc/registration_singleUser.html";
-                        break;
-
-                        case 'registercorp':
-                            include "inc/registration_business.html";
-                        break;
-
-                        case 'help':
-                            include "inc/info.html";
-                        break;
-
-                        case 'yourdata':
-                            include "inc/yourdata.html";
-                        break;
-
-                        case 'about':
-                            include "inc/about.html";
-                        break;
-
-                        case 'newpassword':
-                            include "inc/newpassword.html";
-                        break;
-
-                        case 'posts':
-                            include "inc/posts.html";
-                        break;
-
-                        case 'profilepage':
-                            include "inc/userpage.html";
-                        break;
-                    }
             if(isset($_GET['page'])) {
                 switch($_GET['page']) {
                     case 'login':
@@ -96,6 +58,10 @@
 
                     case 'posts':
                         include "inc/posts.html";
+                    break;
+
+                    case 'profilepage':
+                        include "inc/userpage.html";
                     break;
                 }
             }
