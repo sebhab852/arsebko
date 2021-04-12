@@ -1,29 +1,28 @@
 <section id="login">
 	<div class="container-fluid mt-4 px-4">
-	<div class="container rounded">
+		<div class="container rounded">
+			<form class="text-center border border-light p-5 bg-logindiv" action="index.php?action=login" method="POST">
+				<p class="h4 mb-4">Anmeldung</p>
+				<div class="form-row mb-2">
+					<input type="text" id="" class="form-control mb-4" name="usernameEingabe" placeholder="Benutzername" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+				</div>
+				<div class="form-row mb-2">
+					<input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordEingabe" placeholder="Passwort" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+				</div>
 
-		<form class="text-center border border-light p-5 bg-logindiv" action="index.php?action=login" method="POST">
-			<p class="h4 mb-4">Login</p>
-			<div class="form-row mb-2">
-				<input type="text" id="" class="form-control mb-4" name="usernameEingabe" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
-			</div>
-			<div class="form-row mb-2">
-				<input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordEingabe" placeholder="Passwort" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
-			</div>
-
-			<input type="submit" name="submit" value="Login" class="btn btn-primary">
-			<input type="reset" name="reset" value="Reset" class="btn btn-danger">
-			<div class="row mt-2">
-				<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4 mt-1">
-					Sie haben noch kein Konto? Registrieren Sie sich <a href="index.php?menu=register">hier</a>
-				</small>
-			</div>
-			<div class="row">
-				<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-						<a href="index.php?menu=whoopsie">Passwort vergessen?</a>
-				</small>
-			</div>
-		</form>
-	</div>
+				<input type="submit" name="submit" value="Anmelden" class="btn btn-primary">
+				<input type="reset" name="reset" value="Abbrechen" class="btn btn-danger">
+				<div class="row mt-2">
+					<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4 mt-1">
+						Sie haben noch kein Konto? Registrieren Sie sich <a href="index.php?page=register">hier</a>
+					</small>
+				</div>
+				<div class="row">
+					<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+							<a href="index.php?page=newpassword">Passwort vergessen?</a>
+					</small>
+				</div>
+			</form>
+		</div>
 	</div>
 </section>
