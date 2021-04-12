@@ -20,95 +20,57 @@
     </head>
 
     <body>
-
-    <section id="homepage">
-        <?php
-            include "inc/navbar.html";
+        <section id="homepage">
+            <?php
+                include "inc/navbar.html";
+            
         
-    
-            if(isset($_GET['page'])) {
-                switch($_GET['page']) {
-                    case 'login':
-                        include "inc/login.html";
-                    break;
+                if(isset($_GET['page'])) {
+                    switch($_GET['page']) {
+                        case 'login':
+                            include "inc/login.html";
+                        break;
 
-                    case 'registeruser':
-                        include "inc/registration_singleUser.html";
-                    break;
+                        case 'registeruser':
+                            include "inc/registration_singleUser.html";
+                        break;
 
-                    case 'registercorp':
-                        include "inc/registration_business.html";
-                    break;
+                        case 'registercorp':
+                            include "inc/registration_business.html";
+                        break;
 
-                    case 'help':
-                        include "inc/info.html";
-                    break;
+                        case 'help':
+                            include "inc/info.html";
+                        break;
 
-                    case 'yourdata':
-                        include "inc/yourdata.html";
-                    break;
+                        case 'yourdata':
+                            include "inc/yourdata.html";
+                        break;
 
-                    case 'about':
-                        include "inc/about.html";
-                    break;
+                        case 'about':
+                            include "inc/about.html";
+                        break;
 
-                    case 'newpassword':
-                        include "inc/newpassword.html";
-                    break;
+                        case 'newpassword':
+                            include "inc/newpassword.html";
+                        break;
 
-                    case 'posts':
-                        include "inc/posts.html";
-                    break;
+                        case 'posts':
+                            include "inc/posts.html";
+                        break;
 
-                    case 'profilepage':
-                        include "inc/userpage.html";
-                    break;
+                        case 'profilepage':
+                            include "inc/userpage.html";
+                        break;
+                    }
                 }
-            }
-            else {
-                echo
-                '<div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">        
-                    <div class="carousel-inner">
-                        <div id="crsl-img-1" class="carousel-item active">
-                            <div id="crsl-container" class="container">
-                                <h1 class="crsl-title">Kommunikation</h1>
-                                <p class="crsl-text">Seien Sie in Kontakt mit Unternehmen auf der ganzen Welt.</p>
-                            </div>
-                        </div>
-        
-                        <div id="crsl-img-2" class="carousel-item">
-                            <div id="crsl-container" class="container">
-                                <h1 class="crsl-title">Zusammenarbeit</h1>
-                                <p class="crsl-text">Arbeiten Sie gemeinsam an Projekten.</p>
-                            </div>
-                        </div>
-        
-                        <div id="crsl-img-3" class="carousel-item">
-                            <div id="crsl-container" class="container">
-                                <h1 class="crsl-title">Kreativität</h1>
-                                <p class="crsl-text">Lassen Sie sich inspirieren.</p>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <a href="#myCarousel" class="carousel-control-prev" role="button" data-slide="prev">
-                        <span class="sr-only"></span>
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-        
-                    <a href="#myCarousel" class="carousel-control-next" role="button" data-slide="next">
-                        <span class="sr-only"></span>
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
-                </div>';
-            }
-        ?>
-    </section>
+                else {
+                    include "inc/carousel.html";
+                }
+            ?>
+        </section>
 
         
-
-
-
 
 
 
@@ -117,6 +79,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     </body>
+    
     <footer>
         <?php
             include "inc/footer.html";
