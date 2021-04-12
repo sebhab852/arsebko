@@ -19,7 +19,7 @@
         <title>Arsebko | Business Ideas and more</title>
     </head>
 
-    <body class="overflow-hidden">
+    <body>
 
     <section id="homepage">
     <?php
@@ -61,6 +61,10 @@
 
                         case 'posts':
                             include "inc/posts.html";
+                        break;
+
+                        case 'profilepage':
+                            include "inc/userpage.html";
                         break;
                     }
                 }
