@@ -19,13 +19,15 @@
         <title>Arsebko | Business Ideas and more</title>
     </head>
 
+    <body class="overflow-hidden">
+
+    <section id="homepage">
     <?php
         include "inc/navbar.html";
     ?>
-    <body>
         
         
-        <section id="homepage">
+        
             <?php
                 if(isset($_GET['page'])) {
                     switch($_GET['page']) {
