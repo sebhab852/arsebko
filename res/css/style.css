@@ -137,3 +137,15 @@ body {
     background-color: white;
     margin-bottom: 50px;
 }
+
+.sectionpadding {
+    padding-top: 100px;
+}
+
+.navigationsleiste {
+    max-width: 500px;
+}
+
+nav.navbar {
+    width: inherit;
+  }
