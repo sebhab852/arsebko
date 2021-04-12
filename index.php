@@ -44,17 +44,24 @@
                         break;
 
                         case 'help':
-                            include "inc/help.php";
+                            include "inc/info.html";
                         break;
 
                         case 'yourdata':
-                            include "inc/yourdata.php";
+                            include "inc/yourdata.html";
                         break;
 
                         case 'about':
                             include "inc/about.html";
                         break;
 
+                        case 'newpassword':
+                            include "inc/newpassword.html";
+                        break;
+
+                        case 'posts':
+                            include "inc/posts.html";
+                        break;
                     }
                 }
                 else {
@@ -111,7 +118,7 @@
     </body>
     <footer>
         <?php
-            include "inc/footer.html";        
+            include "inc/footer.html";
         ?>
     </footer>    
 </html>
