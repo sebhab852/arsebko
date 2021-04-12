@@ -130,3 +130,9 @@ body {
 #posts {
     padding-top: 100px;
 }
+
+
+#post-container {
+    background-color: white;
+    margin-bottom: 50px;
+}
