@@ -93,7 +93,7 @@ body {
     content: "|";
     position: absolute;
     top: 10px;
-    margin-left: 10px;
+    margin-left: 9px;
 }
 
 .footer {
@@ -119,7 +119,7 @@ body {
 
 
 #homepage {
-    padding-bottom: 500px;
+    padding-bottom: 200px;
 }
 
 
@@ -148,4 +148,36 @@ body {
 
 nav.navbar {
     width: inherit;
-  }
+}
+
+
+#homepage-content {
+    padding-top: 120px;
+    text-align: center;
+}
+
+
+#homepage-title {
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+
+.homepage-text {
+    padding-bottom: 45px;
+}
+
+
+#info {
+    padding-top: 100px;
+}
+
+
+#info-title {
+    font-weight: bold;
+}
+
+
+.info-help {
+    padding-top: 25px;
+}

@@ -66,6 +66,7 @@
                 }
                 else {
                     include "inc/carousel.html";
+                    include "inc/homepage.html";
                 }
             ?>
         </section>
