@@ -148,4 +148,16 @@ body {
 
 nav.navbar {
     width: inherit;
-  }
+}
+
+.profilepageContainer {
+      min-height:500px;
+      background: linear-gradient(to right, rgba(49,197,223,0.2), rgba(201,201,201,0.3)) !important;
+}
+
+.profile-picture {
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+    border-radius: 70%;
+}

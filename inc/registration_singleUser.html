@@ -34,15 +34,41 @@
                     <input type="text" id="" class="form-control" name="ort" placeholder="Ort" required>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" name="email" placeholder="E-mail" required>
+                </div>
+
+                <div class="col">
+                    <select class="form-control" id="gender">
+                        <option value="" disabled selected hidden >Geschlecht</option>
+                        <option value="nb" >NB</option>
+                        <option value="male">Männlich</option>
+                        <option value="female">Weiblich</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="text" id="" class="form-control mb-4" name="username" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+                </div>
+            </div>
             
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" name="email" placeholder="E-mail" required>
-            
-            <input type="text" id="" class="form-control mb-4" name="username" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
 
             <!-- Password -->
-            <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="password" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
-
-            <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordrep" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+            <div class="row">
+                <div class="col">
+                    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="password" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col">
+                    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordrep" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+                </div>
+            </div>
+            
             
             <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                 <p>A <b> lowercase </b> letter, a <b>capital (uppercase)</b> letter and a <b>number</b>.  Minimum <b>8 characters</b></p>
