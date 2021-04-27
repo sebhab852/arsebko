@@ -3,17 +3,21 @@
         private $dbConn;
     
         function __construct(){
-            require "credentials.php";
+            require "creds.php";
             $this->dbConn = new mysqli($servername, $username, $password, $db);
         }
 
         public function getAllUsers(){
-            $stmt = $this->dbConn->prepare("SELECT * FROM Person");
+            $stmt = $this->dbConn->prepare("SELECT `nachname` FROM Person");
             if($stmt->execute()){
                 $stmt->bind_result($name);
                 $stmt->fetch();
                 return $name;
             }
+        }
+
+        public function registerNewSingleUser($param){
+
         }
 
     

@@ -1,5 +1,5 @@
 <?php
-    include "../db/datahandler.php"
+    include "db/datahandler.php";
     class Logic {
         private $dh;
         function __construct() {
