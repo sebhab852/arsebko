@@ -24,12 +24,32 @@
 
 
         public function registerUser($userData) {
-            // TODO
+            
+            $username = $userData->getUsername();
+            $email = $userData->getEmail();
+            $password = $userData->getPassword();
+            $firstname = $userData->getFirstname();
+            $lastname = $userData->getLastname();
+
+            if ($this->existsByUsername($username)) throw new Exception("Username ist bereits vergeben!");
+
+            $stmt = $this->dbConn->prepare('INSERT INTO user (username, email, password, firstname, lastname) VALUES (?, ?, ?, ?, ?)');
+            $stmt->bind_param("sssss", $username, $email, $password, $firstname, $lastname);
+
+            return $stmt->execute();
         }
 
 
         public function loginUser($userData) {
             // TODO
+        }
+
+        function existsByUsername($username)
+        {
+        $this->_getByUsername->bind_param("s", $username);
+        $this->_getByUsername->execute();
+        $row = $this->_getByUsername->get_result()->fetch_assoc();
+        return $row !== NULL ? $row : false;
         }
     }
 ?>
