@@ -44,9 +44,9 @@
             // TODO
         }
 
-        function existsByUsername($username)
+        public function existsByUsername($userData)
         {
-        $this->_getByUsername->bind_param("s", $username);
+        $this->_getByUsername->bind_param("s", $userData);
         $this->_getByUsername->execute();
         $row = $this->_getByUsername->get_result()->fetch_assoc();
         return $row !== NULL ? $row : false;
