@@ -48,7 +48,7 @@
         public function loginUser($userData) {
             // TODO
         }
-
+            
         public function existsByUsername($userData)
         {
         $this->_getByUsername->bind_param("s", $userData);
