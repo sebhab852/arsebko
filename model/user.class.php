@@ -2,15 +2,17 @@
 
     
     class userObjekt {
-        protected $firstname;
-        protected $lastname;
-        protected $email;
-        protected $username;
-        protected $pw;
+        public $id;
+        public $firstname;
+        public $lastname;
+        public $email;
+        public $username;
+        public $pw;
 
 
 
-        public function __construct($firstname, $lastname, $email, $username, $pw) {
+        public function __construct($id, $firstname, $lastname, $email, $username, $pw) {
+            $this->setID($id);
             $this->setFirstname($firstname);
             $this->setLastname($lastname);
             $this->setEmail($email);
@@ -19,6 +21,9 @@
         }
 
 
+        public function setID($id){
+            $this->id = $id;
+        }
 
         public function getFirstname() {
             return $this->firstname;
