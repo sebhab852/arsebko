@@ -14,7 +14,7 @@
 
 
         public function getAllUsers(){
-            $stmt = $this->dbConn->prepare("SELECT `nachname` FROM Person");
+            $stmt = $this->dbConn->prepare("SELECT * FROM Person");
             if($stmt->execute()){
                 $stmt->bind_result($name);
                 $stmt->fetch();
@@ -22,9 +22,6 @@
             }
         }
 
-        public function registerNewSingleUser($param){
-
-        }
 
         public function registerUser($userData) {
             
@@ -34,10 +31,15 @@
             $firstname = $userData->getFirstname();
             $lastname = $userData->getLastname();
 
+            $ort = $userData->getOrt();
+            $strasse = $userData->getStrasse();
+            $hausnummer = $userData->getHausnummer();
+            $plz = $userData->getPlz(); 
+            
             if ($this->existsByUsername($username)) throw new Exception("Username ist bereits vergeben!");
 
-            $stmt = $this->dbConn->prepare('INSERT INTO user (username, email, password, firstname, lastname) VALUES (?, ?, ?, ?, ?)');
-            $stmt->bind_param("sssss", $username, $email, $password, $firstname, $lastname);
+            $stmt = $this->dbConn->prepare('INSERT INTO user (username, email, password, firstname, lastname, ort, strasse, hausnummer, plz) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt->bind_param("sssssssii", $username, $email, $password, $firstname, $lastname, $ort, $strasse, $hausnummer, $Plz);
 
             return $stmt->execute();
         }
