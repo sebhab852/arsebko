@@ -14,12 +14,21 @@
 
 
         public function getAllUsers(){
-            $stmt = $this->dbConn->prepare("SELECT * FROM Person");
-            if($stmt->execute()){
-                $stmt->bind_result($name);
-                $stmt->fetch();
-                return $name;
+            //$stmt = $this->dbConn->prepare("SELECT nachname FROM Person");
+            $stmt = "SELECT * FROM Person";
+            $result = $this->dbConn->query($stmt);
+            $resAr = array();
+            $i = 0;
+            while ($zeile = $result->fetch_array()) {
+                $id = $zeile['id'];
+                $fname = $zeile['vorname'];
+                $lname = $zeile['nachname'];
+
+                $tmpUser = new userObjekt($id, $fname, $lname, $zeile['email'], $zeile['username'], $zeile['passwort']);
+                $resAr[$i] = $tmpUser;
+                $i++;
             }
+            return $resAr;
         }
 
 
