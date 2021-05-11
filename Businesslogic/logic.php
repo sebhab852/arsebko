@@ -16,6 +16,9 @@
                 case "registerSingleUser":
                     $res = $this->dh->registerSingleUser($param);
                     break;
+                case "registerBusiness":
+                    $res = $this->dh->registerBusiness($param);
+                    break;
                 default:
                     $res = null;
                     break;

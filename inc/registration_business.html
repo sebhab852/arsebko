@@ -1,9 +1,13 @@
 <section id="register-business">
-    <div class="container">
-    <div class="row">
-    <div class="col px-4">
+    <div class="container text-center" id="resgister-business-success" style = "display: none; min-height: 500px;">
+        <h2>Registrierung erfolgreich!</h2>
+        <h4 class="text-muted">Sie können nun loslegen</h4>
+    </div>
+    <div class="container" id="register-business-container">
+        <div class="row">
+        <div class="col px-4">
 
-        <form class="text-center border border-light p-5 bg-logindiv" action="index.php?menu=register" method="POST">
+        <div class="text-center border border-light p-5 bg-logindiv" id="registerBusinessForm">
 
             <p class="h4 mb-4 bg1">Sign up - Unternehmen</p>
 
@@ -11,20 +15,20 @@
 
                 <div class="col">
                     <!-- Firmenname -->
-                    <input type="text" id="firmenname" class="form-control" name="firmaName" placeholder="Firmenname" required>
+                    <input type="text" id="registerBizFirmenname" class="form-control" name="firmaName" placeholder="Firmenname" required>
                 </div>
             </div>
             
             <!--adresse-->
             <div class="row mb-4">
                 <div class="col">
-                    <input type="text" id="" class="form-control" name="adress" placeholder="Straße und Hausnummer" required>
+                    <input type="text" id="registerBizStrasse" class="form-control" name="adress" placeholder="Straße und Hausnummer" required>
                 </div>
                 <div class="col">
-                    <input type="number" id="" class="form-control" name="plz" placeholder="PLZ" min="1000" max="9999" required>
+                    <input type="number" id="registerBizPLZ" class="form-control" name="plz" placeholder="PLZ" min="1000" max="9999" required>
                 </div>
                 <div class="col">
-                    <input type="text" id="" class="form-control" name="ort" placeholder="Ort" required>
+                    <input type="text" id="registerBizOrt" class="form-control" name="ort" placeholder="Ort" required>
                 </div>
             </div>
 
@@ -40,14 +44,14 @@
                 </div>
             </div>
             
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" name="email" placeholder="E-mail" required>
+            <input type="email" id="registerBizEmail" class="form-control mb-4" name="email" placeholder="E-mail" required>
             
-            <input type="text" id="" class="form-control mb-4" name="username" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+            <input type="text" id="registerBizUsername" class="form-control mb-4" name="username" placeholder="Username" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
 
             <!-- Password -->
-            <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="password" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+            <input type="password" id="registerBizPasswort" class="form-control mb-4" name="password" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
 
-            <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordrep" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+            <input type="password" id="registerBizPasswortCheck" class="form-control mb-4" name="passwordrep" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
             
             <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                 <p>A <b> lowercase </b> letter, a <b>capital (uppercase)</b> letter and a <b>number</b>.  Minimum <b>8 characters</b></p>
@@ -62,11 +66,11 @@
             <!-- Sign up button -->
             <div class="row mt-2">
                 <small>
-                    <button class="btn btn-info ml-4" type="submit">Sign Up</button>
+                    <button class="btn btn-info ml-4" id="registerBuisnessButton">Sign Up</button>
                     <button class="btn btn-danger mr-4" type="reset">Reset</button>
                 </small>
             </div>
-        </form>
+        </div>
     </div>    
     </div>
 </div>
