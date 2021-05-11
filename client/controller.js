@@ -1,33 +1,43 @@
 $(document).ready(function () {
     getUsers();
-    console.log("seawas")
+    console.log("seawas");
+    $("#submitRegisterSingleUser").attr("onclick","regsiterSingleUser()")
 });
 
+
 function regsiterSingleUser(){
+
+    //.log($("#registerFormOrt").val())
+
     let jsonData ={
-        method: "querySingleTermineFor",
+        method: "registerSingleUser",
         param: {
             anschrift:{
-                ort:"testort",
-                strasse:"teststrasse 22",
-                plz:5555
+                ort:$("#registerFormOrt").val(),
+                strasse:$("#registerFormStrasse").val(),
+                plz:$("#registerFormPLZ").val()
             },
             person:{
-                vorname:"Marta",
-                nachname:"Musterfrau"
+                vorname:$("#registerFormVorname").val(),
+                nachname:$("#registerFormNachname").val(),
+                username:$("#registerFormUsername").val(),
+                email:$("#registerFormEmail").val(),
+                passwort:$("#registerFormPasswort").val()
             }
         }
       } 
+    console.log(jsonData)
 
     $.ajax({
         type: "POST",
         url: "./servicehandler.php",
         cache: false,
         //data: {method: "registerNewSingleUser", param: null},
-        data: JSON.stringify(jsonData),
+        data: jsonData,
         dataType: "json",
         success: function (response) {  
             console.log(response)
+            console.log("boih")
         }        
     });
 }

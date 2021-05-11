@@ -13,6 +13,9 @@
                     $res = $this->dh->getAllUsers();
                     break;
 
+                case "registerSingleUser":
+                    $res = $this->dh->registerSingleUser($param);
+                    break;
                 default:
                     $res = null;
                     break;

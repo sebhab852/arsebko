@@ -1,10 +1,14 @@
 <?php
     include("Businesslogic/logic.php");
 
+    //print_r($_POST);
+
     $param = "";
     $method = "";
 
+    //check for method and param -> get and post
     isset($_GET["method"]) ? $method = $_GET["method"] : false;
+    isset($_POST["method"]) ? $method = $_POST["method"] : false;
     
     if(isset($_GET["param"]) && $_GET["param"] == null){
         $param = null;
@@ -13,7 +17,9 @@
         isset($_GET["param"]) ? $param = $_GET["param"] : false;
     }
 
-    
+    isset($_POST["param"]) ? $param = $_POST["param"] : false;
+
+
     $logic = new Logic();
     $result = $logic->handleRequest($method, $param); 
     

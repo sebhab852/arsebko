@@ -32,25 +32,32 @@
         }
 
 
-        public function registerUser($userData) {
+        public function registerSingleUser($userData) {
             
-            $username = $userData->getUsername();
-            $email = $userData->getEmail();
-            $password = $userData->getPassword();
-            $firstname = $userData->getFirstname();
-            $lastname = $userData->getLastname();
+            $username = $userData["person"]["username"];
+            $email = $userData["person"]["email"];
+            $password = $userData["person"]["passwort"];
+            $firstname = $userData["person"]["vorname"];
+            $lastname = $userData["person"]["nachname"];
 
-            $ort = $userData->getOrt();
-            $strasse = $userData->getStrasse();
-            $hausnummer = $userData->getHausnummer();
-            $plz = $userData->getPlz(); 
+            $ort = $userData["anschrift"]["ort"];
+            $strasse = $userData["anschrift"]["strasse"];
+            $plz = $userData["anschrift"]["plz"];; 
             
-            if ($this->existsByUsername($username)) throw new Exception("Username ist bereits vergeben!");
+            //if ($this->existsByUsername($username)) throw new Exception("Username ist bereits vergeben!");
+            $stmt1 = $this->dbConn->prepare("INSERT INTO anschrift (`ort`,`strasse`, `plz`) VALUES (?,?,?)");
+            $stmt1->bind_param("ssi",$ort,$strasse, $plz);
+            $stmt1->execute();
 
-            $stmt = $this->dbConn->prepare('INSERT INTO user (username, email, password, firstname, lastname, ort, strasse, hausnummer, plz) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-            $stmt->bind_param("sssssssii", $username, $email, $password, $firstname, $lastname, $ort, $strasse, $hausnummer, $Plz);
+            $stmt2 = "SELECT MAX(anschriftID) FROM `anschrift`";
+            $result = $this->dbConn->query($stmt2);
+            $id = $result->fetch_all();
 
-            return $stmt->execute();
+            $stmt3 = $this->dbConn->prepare("INSERT INTO person (`vorname`,`nachname`, `username`,`email`,`passwort`,`anschriftID`, `firmaID`) VALUES (?,?,?,?,?,?,NULL)");
+            $stmt3->bind_param("sssssi",$firstname ,$lastname, $username, $email, $password, $id[0][0]);
+            $stmt3->execute();
+
+            return true;
         }
 
 
