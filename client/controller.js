@@ -152,7 +152,6 @@ function loginUser() {
             let loginAlert = document.getElementById("login-alert");
             $(loginAlert).text("Bitte füllen Sie alle Felder aus!");
             
-            loginAlert = true;
             return;
         }
     }
@@ -171,12 +170,44 @@ function loginUser() {
 
                 if(response == -1) {
                     if( (loginAlert == true && loginFailed == false) || (loginAlert && loginFailed) ) {
-                        let loginAlert = document.getElementById("login-alert");
-                        $(loginAlert).text("Der Benutzername oder das Passwort ist falsch!");
-                        
-                        loginFailed = true;
+                        if(document.getElementById("login-alert")) {
+                            let loginAlert = document.getElementById("login-alert");
+                            $(loginAlert).text("Der Benutzername oder das Passwort ist falsch!");
+
+                            loginFailed = true;
+                            return;
+                        }
+                    }
+                    else {
+                        let loginTitle = document.getElementById("login-title");
+                        let alertDiv = document.createElement("div");
+                        $(alertDiv).attr("id", "login-alert");
+                        $(alertDiv).attr("class", "alert alert-danger");
+                        $(alertDiv).attr("role", "alert");        
+                        $(alertDiv).text("Der Benutzername oder das Passwort ist falsch!");
+                
+                        $(alertDiv).css("margin-top", "1em");
+                        $(alertDiv).css("font-size", "0.75em");
+                        $(alertDiv).css("display", "block");
+                        $(alertDiv).css("margin-left", "auto");
+                        $(alertDiv).css("margin-right", "auto");
+                        $(alertDiv).css("width", "40%");
+                        $(alertDiv).css("font-weight", "bold");
+                
+                        loginTitle.append(alertDiv);
+
+                        loginAlert = true;
                         return;
                     }
+                    
+                    
+                    // if( (loginAlert == true && loginFailed == false) || (loginAlert && loginFailed) ) {
+                    //     let loginAlert = document.getElementById("login-alert");
+                    //     $(loginAlert).text("Der Benutzername oder das Passwort ist falsch!");
+                        
+                    //     loginFailed = true;
+                    //     return;
+                    // }
                 }
                 else if(response == usernameLogin) {
                     window.location.replace("./index.php");
