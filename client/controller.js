@@ -173,7 +173,6 @@ function loginUser() {
                         if(document.getElementById("login-alert")) {
                             let loginAlert = document.getElementById("login-alert");
                             $(loginAlert).text("Der Benutzername oder das Passwort ist falsch!");
-
                             loginFailed = true;
                             return;
                         }
@@ -195,10 +194,10 @@ function loginUser() {
                         $(alertDiv).css("font-weight", "bold");
                 
                         loginTitle.append(alertDiv);
-
                         loginAlert = true;
                         return;
                     }
+                    
                     
                     
                     // if( (loginAlert == true && loginFailed == false) || (loginAlert && loginFailed) ) {

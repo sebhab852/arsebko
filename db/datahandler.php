@@ -84,6 +84,7 @@
             $password = $userData["person"]["passwort"];
             $firstname = $userData["person"]["vorname"];
             $lastname = $userData["person"]["nachname"];
+            $password = hash('sha256', $password);
 
             $ort = $userData["anschrift"]["ort"];
             $strasse = $userData["anschrift"]["strasse"];
