@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="text-center">
-                    <img src="res/img/CvRkG5qUMAAJ6rz.jpg" alt="Avatar" class="profile-picture" height="220px" width="220px">
+                    <img src="res/img/maleavatar.png" alt="Avatar" class="mt-3" height="150px" width="150px">
                 </div>
             </div>
             <div class="col-md-6">
