@@ -1,5 +1,6 @@
 <?php
     include("Businesslogic/logic.php");
+    require_once("model/user.class.php");
 
     //print_r($_POST);
 
@@ -12,6 +13,12 @@
     
     if(isset($_GET["param"]) && $_GET["param"] == null){
         $param = null;
+    }
+    else if(isset($_GET["param[username]"]) && isset($_GET["param[password]"])) {
+        $username = $_GET["param[username]"];
+        $password = $_GET["param[password]"];
+
+        $param = new userObjekt(null, null, null, null, $username, $password);
     }
     else {
         isset($_GET["param"]) ? $param = $_GET["param"] : false;

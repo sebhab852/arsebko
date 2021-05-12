@@ -194,3 +194,8 @@ nav.navbar {
 .info-help {
     padding-top: 25px;
 }
+
+
+#navbar-title {
+    margin-left: -1em;
+}

@@ -16,9 +16,23 @@
                 case "registerSingleUser":
                     $res = $this->dh->registerSingleUser($param);
                     break;
+                
                 case "registerBusiness":
                     $res = $this->dh->registerBusiness($param);
                     break;
+
+                case "loginUser":
+                    $res = $this->dh->loginUser($param);
+                    break;
+    
+                case "getUserByUsername":
+                    $res = $this->dh->getUserByUsername($param);
+                    break;
+    
+                case "getAdressByUsername":
+                    $res = $this->dh->getAdressByUsername($param);
+                    break;
+                
                 default:
                     $res = null;
                     break;

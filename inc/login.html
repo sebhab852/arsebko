@@ -1,16 +1,16 @@
 <section id="login">
 	<div class="container-fluid mt-4 px-4">
 		<div class="container rounded">
-			<form class="text-center border border-light p-5 bg-logindiv" action="index.php?action=login" method="POST">
-				<p class="h4 mb-4">Anmeldung</p>
+			<form id="login-form" class="text-center border border-light p-5 bg-logindiv" action="index.php?action=login" method="POST">
+					<p id="login-title" class="h4 mb-4">Anmeldung</p>
 				<div class="form-row mb-2">
-					<input type="text" id="" class="form-control mb-4" name="usernameEingabe" placeholder="Benutzername" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
+					<input type="text" id="usernameLogin" class="form-control mb-4" name="usernameEingabe" placeholder="Benutzername" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
 				</div>
 				<div class="form-row mb-2">
-					<input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" name="passwordEingabe" placeholder="Passwort" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+					<input type="password" id="passwordLogin" class="form-control mb-4" name="passwordEingabe" placeholder="Passwort" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
 				</div>
 
-				<input type="submit" name="submit" value="Anmelden" class="btn btn-primary">
+				<input type="submit" name="submit" value="Anmelden" onclick=loginUser() class="btn btn-primary">
 				<input type="reset" name="reset" value="Abbrechen" class="btn btn-danger">
 				<div class="row mt-2">
 					<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4 mt-1">

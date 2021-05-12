@@ -18,9 +18,19 @@
 				
                 <br><br>
                 <div class="row">
-					<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-							<a href="index.php?page=login">Zurück zur Anmeldung</a>
-					</small>
+					<?php
+						if(isset($_SESSION['login']) && isset($_SESSION['username'])) {
+							if($_SESSION['login'] == true) {
+								echo '<a href="index.php?page=profilepage&user='.$_SESSION['username'].'">Zurück zum Profil</a>';
+							}
+						}
+						else {
+							echo
+							'<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+								<a href="index.php?page=login">Zurück zur Anmeldung</a>
+							</small>';
+						}
+					?>
 				</div>
 			</form>
 		</div>

@@ -2,10 +2,10 @@
 
     
     class anschriftObjekt {
-        protected $ort;
-        protected $strasse;
-        protected $hausnummer;
-        protected $plz;
+        public $ort;
+        public $strasse;
+        public $hausnummer;
+        public $plz;
 
 
         

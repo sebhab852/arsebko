@@ -22,7 +22,14 @@
     <body>
         <section id="homepage">
             <?php
-                include "inc/navbar.html";
+                if(isset($_SESSION['login']) && isset($_SESSION['username'])) {
+                    if($_SESSION['login'] == true) {
+                        include "inc/navbarUser.php";
+                    }
+                }
+                else {
+                    include "inc/navbar.html";
+                }
             
         
                 if(isset($_GET['page'])) {
@@ -52,7 +59,7 @@
                         break;
 
                         case 'newpassword':
-                            include "inc/newpassword.html";
+                            include "inc/newpassword.php";
                         break;
 
                         case 'posts':
@@ -60,7 +67,15 @@
                         break;
 
                         case 'profilepage':
-                            include "inc/userpage.html";
+                            include "inc/userpage.php";
+                        break;
+
+                        case 'logout':
+                            include "inc/logout.php";
+                        break;
+
+                        case 'editprofile':
+                            include "inc/editprofile.php";
                         break;
                     }
                 }

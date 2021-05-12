@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     require_once("./model/user.class.php");
     require_once("./model/company.class.php");
     require_once("./model/address.class.php");
@@ -102,18 +104,100 @@
 
             return true;
         }
+        
+        
+        public function existsByUsername($userData) {
+            $this->_getByUsername->bind_param("s", $userData);
+            $this->_getByUsername->execute();
+            $row = $this->_getByUsername->get_result()->fetch_assoc();
+            
+            return $row !== NULL ? $row : false;
+        }
 
 
         public function loginUser($userData) {
-            // TODO
+            $username = $userData["username"];
+            $passwortTmp = $userData["password"];
+            $passwort = hash('sha256', $passwortTmp);
+
+            $login_stmt = $this->dbConn->prepare("SELECT `username` FROM `person` WHERE `username` = ? AND `passwort` = ?");
+            $login_stmt->bind_param("ss", $username, $passwort);
+            $login_stmt->execute();
+
+            $login_result = $login_stmt->get_result();
+
+            if($login_result->num_rows == 1) {
+                $login_object = $login_result->fetch_object();                
+                $_SESSION['login'] = true;
+                $_SESSION['username'] = $login_object->username;
+
+                return $username;
+            }
+            else {
+                return -1;
+            }
         }
-            
-        public function existsByUsername($userData)
-        {
-        $this->_getByUsername->bind_param("s", $userData);
-        $this->_getByUsername->execute();
-        $row = $this->_getByUsername->get_result()->fetch_assoc();
-        return $row !== NULL ? $row : false;
+
+
+        public function getUserByUsername($username) {
+            $getuser_stmt = $this->dbConn->prepare("SELECT * FROM `person` WHERE `username` = ?");
+            $getuser_stmt->bind_param("s", $username);
+
+            $getuser_stmt->execute();
+
+            $getuser_result = $getuser_stmt->get_result();
+
+            if($getuser_result->num_rows == 1) {
+                $getuser_object = $getuser_result->fetch_object();
+
+                $vorname = $getuser_object->vorname;
+                $nachname = $getuser_object->nachname;
+                $email = $getuser_object->email;
+                $username = $getuser_object->username;
+                
+                $user = new userObjekt(null, $vorname, $nachname, $email, $username, null);
+
+                return $user;
+            }
+        }
+
+
+        public function getAdressByUsername($username) {
+            $getaddressid_stmt = $this->dbConn->prepare("SELECT `anschriftID` FROM `person` WHERE `username` = ?");
+            $getaddressid_stmt->bind_param("s", $username);
+            $getaddressid_stmt->execute();
+
+            $getaddressid_result = $getaddressid_stmt->get_result();
+            $anschriftID = -1;
+
+            if($getaddressid_result) {
+                $getaddressid_object = $getaddressid_result->fetch_object();
+                $anschriftID = $getaddressid_object->anschriftID;
+            }
+
+            $getaddressid_stmt->close();
+
+
+            $getaddress_stmt = $this->dbConn->prepare("SELECT * FROM `anschrift` WHERE `anschriftID` = ?");
+            $getaddress_stmt->bind_param("i", $anschriftID);
+            $getaddress_stmt->execute();
+
+            $getaddress_result = $getaddress_stmt->get_result();
+
+            if($getaddress_result->num_rows == 1) {
+                $getaddress_object = $getaddress_result->fetch_object();
+
+                $ort = $getaddress_object->ort;
+                $strasse = $getaddress_object->strasse;
+                $plz = $getaddress_object->plz;
+                
+                $anschrift = new anschriftObjekt($ort, $strasse, null, $plz);
+
+                return $anschrift;
+            }
+            else {
+                return 187;
+            }
         }
     }
 ?>
