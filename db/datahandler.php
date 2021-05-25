@@ -200,5 +200,29 @@
                 return 187;
             }
         }
+        
+        public function editUser($userData){
+
+            $username = $userData["person"]["username"];
+            $email = $userData["person"]["email"];
+            $password = $userData["person"]["passwort"];
+            $firstname = $userData["person"]["vorname"];
+            $lastname = $userData["person"]["nachname"];
+            $password = hash('sha256', $password);
+            $id = $userData["person"]["id"];
+
+            $ort = $userData["anschrift"]["ort"];
+            $strasse = $userData["anschrift"]["strasse"];
+            $plz = $userData["anschrift"]["plz"];
+
+            $stmt1 = $this->dbConn->prepare("UPDATE anschrift SET ort=?,strasse=?, plz=? where id=?");
+            $stmt1->bind_param("ssii", $ort, $strasse, $plz, $id);
+            $stmt1->execute();
+
+            $stmt2 = $this->dbConn->prepare("UPDATE person SET vorname=?, nachname=?, username=?,email=?, passwort=? where id=?");
+            $stmt2->bind_param("sssssi", $firstname, $lastname, $username, $email, $password, $id);
+            $stmt2->execute();
+            
+        }
     }
 ?>

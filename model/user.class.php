@@ -25,6 +25,10 @@
             $this->id = $id;
         }
 
+        public function getID(){
+            return $this->$id;
+        }
+
         public function getFirstname() {
             return $this->firstname;
         }
