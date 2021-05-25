@@ -1,3 +1,5 @@
+var currentUser;
+
 $(document).ready(function () {
     // console.log("seawas");
     
@@ -217,10 +219,11 @@ function loginUser() {
 }
 
 
-let currentUser = '';
+
 function getUserData(username) {
     // console.log(username);
-    currentUser = username;
+    //$(currentUser).val(username);
+    //console.log("Current User in getUserData "+username);
     
     $.ajax({
         type: "GET",
@@ -251,6 +254,7 @@ function redirectAfterLogout() {
 
 function fillUserData(username) {
     // console.log(username);
+    //console.log("Current User in fillUserdate "+ username);
     
     $.ajax({
         type: "GET",
@@ -290,8 +294,8 @@ function fillUserAddress(username) {
 }
 
 
-function checkAndApplyChanges() { // Funktion ist noch nicht fertig
-    let username = currentUser;
+function checkAndApplyChanges(username) { // Funktion ist noch nicht fertig
+    //let username = currentUser;
 
     let editedVorname = $("#edituser-vorname").val();
     let editedNachname = $("#edituser-nachname").val();
@@ -309,8 +313,8 @@ function checkAndApplyChanges() { // Funktion ist noch nicht fertig
         cache: false,
         data: {method: "getUserByUsername", param: username},
         dataType: "json",
-        success: function(response) {  
-            // console.log(response);
+        success: function(response) {   
+            console.log(response);
 
             if(editedVorname != response['firstname']) {
                 changeVorname(username, editedVorname);
@@ -338,7 +342,7 @@ function checkAndApplyChanges() { // Funktion ist noch nicht fertig
         data: {method: "getAdressByUsername", param: username},
         dataType: "json",
         success: function(response) {  
-            // console.log(response);
+            console.log(response);
 
             if(editedOrt != response['ort']) {
                 changeOrt(username, editedOrt);

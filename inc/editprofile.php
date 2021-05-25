@@ -38,12 +38,11 @@
         </div>
 
         <br><br>
-        <input type="submit" name="submit" value="Änderungen speichern" onclick=checkAndApplyChanges() class="btn btn-primary w-100">
+        <input type="submit" name="submit" value="Änderungen speichern" onclick=checkAndApplyChanges(<?php echo json_encode($_SESSION['username']); ?>)  id="applyChangesBtn" class="btn btn-primary w-100">
     </div>
 </section>
 
 <script>
     var username = <?php echo json_encode($_SESSION['username']); ?>;
-    
     fillUserData(username);
 </script>
