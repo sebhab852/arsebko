@@ -249,5 +249,81 @@
             $stmt2->execute();
             
         }
+
+
+        public function uploadPost($postObject) {            
+            $username = $postObject['post']['username'];
+            $postTitle = $postObject['post']['title'];
+            $postContent = $postObject['post']['content'];
+            
+            $getuserid_stmt = $this->dbConn->prepare("SELECT `id`, `firmaID` FROM `person` WHERE `username` = ?");
+            $getuserid_stmt->bind_param("s", $username);
+            $getuserid_stmt->execute();
+
+            $firmaID = -2;
+            $getuserid_result = $getuserid_stmt->get_result();
+            if($getuserid_result) {
+                $getuserid_object = $getuserid_result->fetch_object();
+                $userID = $getuserid_object->id;
+
+                if($getuserid_object->firmaID != null) {
+                    $firmaID = $getuserid_object->firmaID;
+                }
+            }
+            $getuserid_stmt->close();
+            
+            
+            $postDate = date('d.m.Y');
+            if($firmaID == -2) {
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `autorID`) VALUES (?, ?, ?, ?)");
+                $newpost_stmt->bind_param("sssi", $postTitle, $postContent, $postDate, $userID);
+                $newpost_stmt->execute();
+            }
+            else {
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `autorID`, `firmaID`) VALUES (?, ?, ?, ?, ?)");
+                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate, $userID, $firmaID);
+                $newpost_stmt->execute();
+            }
+            
+            return true;
+        }
+
+
+        public function getAllPostRows() {
+            $getrows_stmt = $this->dbConn->prepare("SELECT COUNT(*) FROM `beitrag`");
+            $getrows_stmt->execute();
+
+            $getrows_stmt->bind_result($rows);
+            $getrows_stmt->fetch();
+
+            
+            if($rows > 0) {
+                return $rows;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function getAllPosts() {
+            $getallposts_stmt = "SELECT * FROM `beitrag` ORDER BY `datum` DESC";
+            $result = $this->dbConn->query($getallposts_stmt);
+            
+            $postArray = array();
+            $i = 0;
+            while($zeile = $result->fetch_array()) {
+                $titel = $zeile['titel'];
+                $inhalt = $zeile['inhalt'];
+                $datum = $zeile['datum'];
+                $autorID = $zeile['autorID'];
+
+                $tmpPost = new postObjekt($titel, $inhalt, $datum, $autorID);
+                $postArray[$i] = $tmpPost;
+                $i++;
+            }
+            
+            return $postArray;
+        }
     }
 ?>

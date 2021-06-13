@@ -36,6 +36,18 @@
                 case "updateUserInfo":
                     $res = $this->dh->updateUserInfo($param);
                     break;
+
+                case "uploadPost":
+                    $res = $this->dh->uploadPost($param);
+                    break;
+
+                case "getAllPostRows":
+                    $res = $this->dh->getAllPostRows();
+                    break;
+
+                case "getAllPosts":
+                    $res = $this->dh->getAllPosts();
+                    break;
                 
                 default:
                     $res = null;

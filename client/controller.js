@@ -364,3 +364,122 @@ function checkAndApplyChanges(username) { // Funktion ist noch nicht fertig
     //     }
     // });
 }
+
+
+function uploadPost(username) {
+    var postTitle = $("#new-post-title").val();
+    var postContent = $("#new-post-text").val();
+
+    if(postTitle == '' || postContent == '') {
+        alert("Bitte füllen Sie alle Felder aus!");
+    }
+
+    let postObject = {
+        method: "uploadPost",
+        param: {
+            post: {
+                username: username,
+                title: postTitle,
+                content: postContent
+            }
+        }
+    };
+    
+    $('#upload-new-post').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "./servicehandler.php",
+            cache: false,
+            data: postObject,
+            dataType: "json",
+            success: function(response) {
+                // console.log(response)
+                
+                if(response) {
+                    location.reload();
+                }
+            }
+        });
+    });
+}
+
+
+function getAllPostRows() {    
+    $.ajax({
+        type: "GET",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "getAllPostRows", param: null },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+
+            showAllPosts(response);
+        }
+    });
+}
+
+
+function showAllPosts(rows) {
+    if(rows > 0) {
+        $.ajax({
+            type: "GET",
+            url: "./servicehandler.php",
+            cache: false,
+            data: { method: "getAllPosts", param: null },
+            dataType: "json",
+            success: function(response) {
+                // console.log(response);
+                
+                for(let x=0; x<response.length; x++) {
+                    var postsMainContainer = document.getElementById("posts-main-container");
+                    var postContainer = document.createElement("div");
+                    $(postContainer).attr("id", "post-container");
+                    $(postContainer).attr("class", "container rounded");
+
+                    var titel = response[x]['titel'];
+                    var inhalt = response[x]['inhalt'];
+                    var datum = response[x]['datum'];
+                    var autorID = response[x]['autorID'];
+                    
+                    
+                    var breakLine = document.createElement("br");
+                    var horizontalLine = document.createElement("hr");
+                    
+                    var h2 = document.createElement("h2");
+                    $(h2).text(""+titel+"");
+
+                    var h6 = document.createElement("h6");
+                    $(h6).text("Autor: "+autorID+"");
+
+                    var smallText = document.createElement("small");
+                    $(smallText).text("Hochgeladen am: "+datum+"");
+
+                    var p = document.createElement("p");
+                    $(p).attr("class", "post-content");
+                    $(p).text(""+inhalt+"");
+
+                    $(postContainer).append(breakLine);
+                    $(postContainer).append(h2);
+                    $(postContainer).append(h6);
+                    $(postContainer).append(smallText);
+                    $(postContainer).append(horizontalLine);
+                    $(postContainer).append(breakLine);
+                    $(postContainer).append(p);
+                    $(postContainer).append(breakLine);
+
+                    $(postsMainContainer).append(postContainer);
+                }
+            }
+        });
+    }
+    else {
+        var postsMainContainer = document.getElementById("posts-main-container");
+        var postContainer = document.createElement("h2");
+        $(postContainer).attr("class", "text-center");
+        $(postContainer).text("Es existieren noch keine Beiträge!");
+        
+        postsMainContainer.appendChild(postContainer);
+    }
+}

@@ -63,7 +63,7 @@
                         break;
 
                         case 'posts':
-                            include "inc/posts.html";
+                            include "inc/posts.php";
                         break;
 
                         case 'profilepage':

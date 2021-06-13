@@ -199,3 +199,8 @@ nav.navbar {
 #navbar-title {
     margin-left: -1em;
 }
+
+
+#label-new-post {
+    font-weight: bold;
+}
