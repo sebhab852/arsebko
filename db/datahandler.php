@@ -4,6 +4,7 @@
     require_once("./model/user.class.php");
     require_once("./model/company.class.php");
     require_once("./model/address.class.php");
+    require_once("./model/post.class.php");
     
     
     class DataHandler {
