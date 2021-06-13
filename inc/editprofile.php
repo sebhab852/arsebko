@@ -13,7 +13,7 @@
                 <input id="edituser-nachname" type="text" class="form-control" name="nachname" placeholder="Nachname">
                 <br>
                 <label for="username" class="ms-1">Username</label>
-                <input id="edituser-username" type="text" class="form-control" name="username" placeholder="Username">
+                <input id="edituser-username" type="text" class="form-control" name="username" placeholder="Username" disabled>
                 <br>
                 <label for="email" class="ms-1">E-Mail-Adresse</label>
                 <input id="edituser-email" type="text" class="form-control" name="email" placeholder="E-Mail-Adresse">

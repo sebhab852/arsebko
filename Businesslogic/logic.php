@@ -32,6 +32,10 @@
                 case "getAdressByUsername":
                     $res = $this->dh->getAdressByUsername($param);
                     break;
+
+                case "updateUserInfo":
+                    $res = $this->dh->updateUserInfo($param);
+                    break;
                 
                 default:
                     $res = null;

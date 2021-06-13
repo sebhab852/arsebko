@@ -306,55 +306,61 @@ function checkAndApplyChanges(username) { // Funktion ist noch nicht fertig
     let editedStrasse = $("#edituser-adresse").val();
     let editedPlz = $("#edituser-plz").val();
 
+    if(editedEmail == "" || editedVorname  == "" || editedNachname == "" || editedUsername == "" || editedOrt == "" || editedStrasse == "" || editedPlz == ""){
+        alert("Bitte keine Felder leer lassen!");
+        return;
+    }
+
+    let dataJS = {
+        method: "updateUserInfo",
+        param: {
+            anschrift:{
+                ort: editedOrt,
+                strasse: editedStrasse,
+                plz: editedPlz,
+            },
+            person:{
+                vorname: editedVorname,
+                nachname: editedNachname,
+                username: editedUsername,
+                email: editedEmail
+            }
+        }
+    }
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "./servicehandler.php",
         cache: false,
-        data: {method: "getUserByUsername", param: username},
+        data: dataJS,
         dataType: "json",
         success: function(response) {   
+            console.log("yeet")
             console.log(response);
-
-            if(editedVorname != response['firstname']) {
-                changeVorname(username, editedVorname);
-            }
-
-            if(editedNachname != response['nachname']) {
-                changeNachname(username, editedNachname);
-            }
-
-            if(editedUsername != response['username']) {
-                changeUsername(username, editedUsername);
-            }
-
-            if(editedEmail != response['email']) {
-                changeEmail(username, editedEmail);
-            }
         }
     });
 
 
-    $.ajax({
-        type: "GET",
-        url: "./servicehandler.php",
-        cache: false,
-        data: {method: "getAdressByUsername", param: username},
-        dataType: "json",
-        success: function(response) {  
-            console.log(response);
+    // $.ajax({
+    //     type: "GET",
+    //     url: "./servicehandler.php",
+    //     cache: false,
+    //     data: {method: "getAdressByUsername", param: username},
+    //     dataType: "json",
+    //     success: function(response) {  
+    //         console.log(response);
 
-            if(editedOrt != response['ort']) {
-                changeOrt(username, editedOrt);
-            }
+    //         if(editedOrt != response['ort']) {
+    //             changeOrt(username, editedOrt);
+    //         }
 
-            if(editedStrasse != response['strasse']) {
-                changeStrasse(username, editedStrasse);
-            }
+    //         if(editedStrasse != response['strasse']) {
+    //             changeStrasse(username, editedStrasse);
+    //         }
 
-            if(editedPlz != response['plz']) {
-                changePlz(username, editedPlz);
-            }
-        }
-    });
+    //         if(editedPlz != response['plz']) {
+    //             changePlz(username, editedPlz);
+    //         }
+    //     }
+    // });
 }

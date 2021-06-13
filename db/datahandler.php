@@ -33,6 +33,31 @@
             return $resAr;
         }
 
+        public function getUserIDbyUsername($username){
+            $stmt = $this->dbConn->prepare("SELECT `id` FROM `person` WHERE `username` = ?");
+            $stmt->bind_param("s", $username);
+            if($stmt->execute()){
+                $stmt->bind_result($id);
+                $stmt->fetch();
+                return $id;
+            }
+            return false;
+        }
+
+        public function updateUserInfo($userData){
+            $username = $userData["person"]["username"];
+            $email = $userData["person"]["email"];
+            $firstname = $userData["person"]["vorname"];
+            $lastname = $userData["person"]["nachname"];
+            $personID = $this->getUserIDbyUsername($username);
+            $updatePerson = $this->dbConn->prepare("UPDATE `person` SET `vorname` = ?, `nachname`=?, `email`=? WHERE `id` = ?");
+            $updatePerson->bind_param("sssi",$firstname,$lastname,$email,$personID);
+            if($updatePerson->execute()){
+                return true;
+            }
+            return false;
+        }
+
         public function registerBusiness($userData){
 
             $username = $userData["person"]["username"];
