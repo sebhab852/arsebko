@@ -256,6 +256,10 @@
             $username = $postObject['post']['username'];
             $postTitle = $postObject['post']['title'];
             $postContent = $postObject['post']['content'];
+            $postPrivacy = $postObject['post']['private'];
+
+            //var_dump($postPrivacy);
+            //exit();
             
             $getuserid_stmt = $this->dbConn->prepare("SELECT `id`, `firmaID` FROM `person` WHERE `username` = ?");
             $getuserid_stmt->bind_param("s", $username);
@@ -276,13 +280,13 @@
             
             $postDate = date('d.m.Y');
             if($firmaID == -2) {
-                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `autorID`) VALUES (?, ?, ?, ?)");
-                $newpost_stmt->bind_param("sssi", $postTitle, $postContent, $postDate, $userID);
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`) VALUES (?,?,?,?,?)");
+                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate,$postPrivacy, $userID);
                 $newpost_stmt->execute();
             }
             else {
-                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `autorID`, `firmaID`) VALUES (?, ?, ?, ?, ?)");
-                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate, $userID, $firmaID);
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`, `firmaID`) VALUES (?, ?, ?, ?, ?, ?)");
+                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate, $postPrivacy,$userID, $firmaID);
                 $newpost_stmt->execute();
             }
             
@@ -318,13 +322,28 @@
                 $inhalt = $zeile['inhalt'];
                 $datum = $zeile['datum'];
                 $autorID = $zeile['autorID'];
+                $private = $zeile['private'];
 
-                $tmpPost = new postObjekt($titel, $inhalt, $datum, $autorID);
+                $tmpPost = new postObjekt($titel, $inhalt, $datum,$private, $autorID);
                 $postArray[$i] = $tmpPost;
                 $i++;
             }
             
             return $postArray;
+        }
+
+        public function getUserByID($param){
+            // var_dump($param);
+            // exit();
+            $stmt = $this->dbConn->prepare("SELECT * FROM `person` WHERE id=?");
+            $stmt->bind_param("i",$param["id"]);
+            if($stmt->execute()){
+                $stmt->bind_result($id,$vname, $nname,$uname, $email, $pw, $anschriftID,$frimaID);
+                $stmt->fetch();
+                $user = new userObjekt($id,$vname,$nname,$email,$uname,$pw);
+                return $user;
+            }
+
         }
     }
 ?>

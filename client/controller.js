@@ -1,4 +1,4 @@
-var currentUser;
+var activeUser;
 
 $(document).ready(function () {
     // console.log("seawas");
@@ -18,6 +18,14 @@ $(document).ready(function () {
     form.onsubmit = function (event) { event.preventDefault() }
 });
 
+function setActiveUser(val){
+    activeUser = val;
+    console.log(activeUser);
+}
+function unsetActiveUser(){
+    activeUser = null;
+    console.log("active user unset" + activeUser);
+}
 
 function regsiterSingleUser(){
 
@@ -64,7 +72,7 @@ function regsiterSingleUser(){
 }
 
 function registerBusiness(){
-    console.log("njoa")
+    //console.log("njoa")
     if($("#registerBizFirmenname").val() == "" || $("#registerBizStrasse").val() == "" || $("#registerBizPLZ").val() == ""|| $("#registerBizOrt").val() == ""|| $("#firmanachname").val() == "" || $("#firmavorname").val() == "" || $("#registerBizEmail").val() == "" || $("#registerBizUsername").val() == "" || $("#registerBizPasswort").val() == "" || $("#registerBizPasswortCheck").val() == ""){
 
         alert("Bitte füllen Sie alle verpflichtenden Felder aus!")
@@ -369,6 +377,12 @@ function checkAndApplyChanges(username) { // Funktion ist noch nicht fertig
 function uploadPost(username) {
     var postTitle = $("#new-post-title").val();
     var postContent = $("#new-post-text").val();
+    if ($('#privacycheck').is(":checked")){
+      var privateCheck = 1;
+    }
+    else{
+        var privateCheck = 0;
+    }
 
     if(postTitle == '' || postContent == '') {
         alert("Bitte füllen Sie alle Felder aus!");
@@ -380,7 +394,8 @@ function uploadPost(username) {
             post: {
                 username: username,
                 title: postTitle,
-                content: postContent
+                content: postContent,
+                private: privateCheck
             }
         }
     };
@@ -422,6 +437,7 @@ function getAllPostRows() {
 
 
 function showAllPosts(rows) {
+    
     if(rows > 0) {
         $.ajax({
             type: "GET",
@@ -430,47 +446,8 @@ function showAllPosts(rows) {
             data: { method: "getAllPosts", param: null },
             dataType: "json",
             success: function(response) {
-                // console.log(response);
-                
-                for(let x=0; x<response.length; x++) {
-                    var postsMainContainer = document.getElementById("posts-main-container");
-                    var postContainer = document.createElement("div");
-                    $(postContainer).attr("id", "post-container");
-                    $(postContainer).attr("class", "container rounded");
-
-                    var titel = response[x]['titel'];
-                    var inhalt = response[x]['inhalt'];
-                    var datum = response[x]['datum'];
-                    var autorID = response[x]['autorID'];
-                    
-                    
-                    var breakLine = document.createElement("br");
-                    var horizontalLine = document.createElement("hr");
-                    
-                    var h2 = document.createElement("h2");
-                    $(h2).text(""+titel+"");
-
-                    var h6 = document.createElement("h6");
-                    $(h6).text("Autor: "+autorID+"");
-
-                    var smallText = document.createElement("small");
-                    $(smallText).text("Hochgeladen am: "+datum+"");
-
-                    var p = document.createElement("p");
-                    $(p).attr("class", "post-content");
-                    $(p).text(""+inhalt+"");
-
-                    $(postContainer).append(breakLine);
-                    $(postContainer).append(h2);
-                    $(postContainer).append(h6);
-                    $(postContainer).append(smallText);
-                    $(postContainer).append(horizontalLine);
-                    $(postContainer).append(breakLine);
-                    $(postContainer).append(p);
-                    $(postContainer).append(breakLine);
-
-                    $(postsMainContainer).append(postContainer);
-                }
+                console.log(response);
+               printPosts(response);
             }
         });
     }
@@ -482,4 +459,79 @@ function showAllPosts(rows) {
         
         postsMainContainer.appendChild(postContainer);
     }
+}
+
+const printPosts = async(response) => {
+    for(let x=0; x<response.length; x++) {
+        var titel = response[x]['titel'];
+        var inhalt = response[x]['inhalt'];
+        var datum = response[x]['datum'];
+        var autorID = response[x]['autorID'];
+        let private = response[x]['private'];
+
+        if((activeUser == null && private == 0) || activeUser != null){
+
+            var postsMainContainer = document.getElementById("posts-main-container");
+            var postContainer = document.createElement("div");
+            $(postContainer).attr("id", "post-container");
+            $(postContainer).attr("class", "container rounded");
+
+
+            console.log(response[x]['private']);
+            var autorName;
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: "./servicehandler.php",
+                cache: false,
+                data: { method: "getUserByID", param: {id: autorID}},
+                dataType: "json",
+                success: function(res) {
+                    autorName = res.username;
+                    
+                }
+            });
+
+            var breakLine = document.createElement("br");
+            var horizontalLine = document.createElement("hr");
+            
+            var h2 = document.createElement("h2");
+            $(h2).text(""+titel+"");
+
+            var h6 = document.createElement("h6");
+            $(h6).text("Autor: "+autorName+"");
+
+            var smallText = document.createElement("small");
+            $(smallText).text("Hochgeladen am: "+datum+"");
+
+            var p = document.createElement("p");
+            $(p).attr("class", "post-content");
+            $(p).text(""+inhalt+"");
+
+            $(postContainer).append(breakLine);
+            $(postContainer).append(h2);
+            $(postContainer).append(h6);
+            $(postContainer).append(smallText);
+            $(postContainer).append(horizontalLine);
+            $(postContainer).append(breakLine);
+            $(postContainer).append(p);
+            $(postContainer).append(breakLine);
+
+            $(postsMainContainer).append(postContainer);
+        }
+    }
+}
+
+const getUserByID = async (id) =>{
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "getUserByID", param: {id: id}},
+        dataType: "json",
+        success: function(response) {
+            
+        }
+    });
 }

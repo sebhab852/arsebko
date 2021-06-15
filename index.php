@@ -24,7 +24,11 @@
             <?php
                 if(isset($_SESSION['login']) && isset($_SESSION['username'])) {
                     if($_SESSION['login'] == true) {
+                        $tmp = $_SESSION["username"];
                         include "inc/navbarUser.php";
+                        echo <<<EOT
+                        <script>setActiveUser("$tmp")</script>
+EOT; //bitte Einrueckung so lassen
                     }
                 }
                 else {

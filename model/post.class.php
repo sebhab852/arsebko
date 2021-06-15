@@ -5,19 +5,27 @@
         public $titel;
         public $inhalt;
         public $datum;
+        public $private;
         public $autorID;
 
 
         
-        public function __construct($titel, $inhalt, $datum, $autorID) {
+        public function __construct($titel, $inhalt, $datum, $private,$autorID) {
             $this->setTitel($titel);
             $this->setInhalt($inhalt);
             $this->setDatum($datum);
+            $this->setPrivacy($private);
             $this->setAutorID($autorID);
         }
 
 
-        
+        public function getPrivacy(){
+            return $this->private;
+        }
+        public function setPrivacy($priv){
+            $this->private = $priv;
+        }
+
         public function getTitel() {
             return $this->titel;
         }

@@ -2,11 +2,17 @@
     <div id="new-post-container" class="container rounded">
         <form id="upload-new-post" action="index.php?page=posts" method="POST">
             <label id="label-new-post" for="new-post" class="mt-1 mb-2 ms-1">Einen neuen Beitrag posten</label>
-            
+
+            <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" id="privacycheck" new="privacycheck" name="privacycheck" value="privat"> 
+                <label class="form-check-label" for="privacycheck"><abbr title="Wenn Sie diese Option auswählen können nur angemeldete User Ihre Posts sehen">Privat</abbr></label>
+            </div>
+
             <input id="new-post-title" class="form-control mb-1" new="new-post-title" placeholder="Titel" required>
             <textarea id="new-post-text" class="form-control" name="new-post-text" rows="10" cols="50" placeholder="Schreiben Sie etwas ..." required></textarea>
             
             <input id="submit-new-post" type="submit" class="btn btn-primary mt-2" onclick=uploadPost(<?php echo json_encode($_SESSION['username']); ?>) value="Posten">
+
         </form>
         <hr><br>
     </div>

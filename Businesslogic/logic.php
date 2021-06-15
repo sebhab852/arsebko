@@ -49,6 +49,10 @@
                     $res = $this->dh->getAllPosts();
                     break;
                 
+                case "getUserByID":
+                    $res = $this->dh->getUserByID($param);
+                    break;
+                
                 default:
                     $res = null;
                     break;

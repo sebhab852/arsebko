@@ -5,5 +5,6 @@
 ?>
 
 <script>
+    unsetActiveUser();
     redirectAfterLogout();
 </script>
