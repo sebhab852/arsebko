@@ -50,6 +50,9 @@
             $email = $userData["person"]["email"];
             $firstname = $userData["person"]["vorname"];
             $lastname = $userData["person"]["nachname"];
+
+
+
             $personID = $this->getUserIDbyUsername($username);
             $updatePerson = $this->dbConn->prepare("UPDATE `person` SET `vorname` = ?, `nachname`=?, `email`=? WHERE `id` = ?");
             $updatePerson->bind_param("sssi",$firstname,$lastname,$email,$personID);
@@ -66,7 +69,8 @@
             $password = $userData["person"]["passwort"];
             $firstname = $userData["person"]["vorname"];
             $lastname = $userData["person"]["nachname"];
-
+            $password = hash('sha256', $password);
+            
             $ort = $userData["anschriftFirma"]["ort"];
             $strasse = $userData["anschriftFirma"]["strasse"];
             $plz = $userData["anschriftFirma"]["plz"];
@@ -231,22 +235,33 @@
 
             $username = $userData["person"]["username"];
             $email = $userData["person"]["email"];
-            $password = $userData["person"]["passwort"];
+            //$password = $userData["person"]["passwort"];
             $firstname = $userData["person"]["vorname"];
             $lastname = $userData["person"]["nachname"];
-            $password = hash('sha256', $password);
-            $id = $userData["person"]["id"];
+            //$password = hash('sha256', $password);
+            //$id = $userData["person"]["id"];
 
             $ort = $userData["anschrift"]["ort"];
             $strasse = $userData["anschrift"]["strasse"];
             $plz = $userData["anschrift"]["plz"];
 
-            $stmt1 = $this->dbConn->prepare("UPDATE anschrift SET ort=?,strasse=?, plz=? where id=?");
-            $stmt1->bind_param("ssii", $ort, $strasse, $plz, $id);
+            $aidstmt = $this->dbConn->prepare("SELECT `anschriftID` FROM `person` WHERE username=?");
+            $aidstmt->bind_param("s",$username);
+            //$aidstmt->bind_result($aid);
+            $aidstmt->execute();
+            $aidstmt_res = $aidstmt->get_result();
+            $aidstmt_obj = $aidstmt_res->fetch_object();
+            $aid = $aidstmt_obj->anschriftID;
+
+            //$aidstmt_res = $aidstmt->get_result();
+            // var_dump($aid);
+            // exit();
+            $stmt1 = $this->dbConn->prepare("UPDATE `anschrift` SET `ort`=?,`strasse`=?, `plz`=?  WHERE `anschriftID`=?");
+            $stmt1->bind_param("ssii", $ort, $strasse, $plz, $aid);
             $stmt1->execute();
 
-            $stmt2 = $this->dbConn->prepare("UPDATE person SET vorname=?, nachname=?, username=?,email=?, passwort=? where id=?");
-            $stmt2->bind_param("sssssi", $firstname, $lastname, $username, $email, $password, $id);
+            $stmt2 = $this->dbConn->prepare("UPDATE `person` SET `vorname` = ?, `nachname`=?, `email`=? WHERE `username`=?");
+            $stmt2->bind_param("ssss", $firstname, $lastname,$email, $username);
             $stmt2->execute();
             
         }
@@ -344,6 +359,196 @@
                 return $user;
             }
 
+        }
+
+
+        public function emailCheck($email) {
+            $checkemail_stmt = $this->dbConn->prepare("SELECT `username` FROM `person` WHERE `email` = ?");
+            $checkemail_stmt->bind_param("s", $email);
+            $checkemail_stmt->execute();
+
+            $checkemail_stmt->bind_result($username);
+            $checkemail_stmt->fetch();
+
+            if($username != null) {
+                return $username;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function changePassword($userData) {
+            $email = $userData["email"];
+            $newPasswordTmp = $userData["password"];
+            $newPassword = hash('sha256', $newPasswordTmp);
+
+            $changepass_stmt = $this->dbConn->prepare("UPDATE `person` SET `passwort` = ? WHERE `email` = ?");
+            $changepass_stmt->bind_param("ss", $newPassword, $email);
+
+            if($changepass_stmt->execute()) {
+                return $email;
+            }
+            else {
+                return false;
+            }
+        }
+
+
+        public function isUserPartOfCompany($username) {
+            $usercompany_stmt = $this->dbConn->prepare("SELECT `firmaID` FROM `person` WHERE `username` = ?");
+            $usercompany_stmt->bind_param("s", $username);
+            $usercompany_stmt->execute();
+
+            $usercompany_stmt->bind_result($firmaID);
+            $usercompany_stmt->fetch();
+
+            if($firmaID != NULL) {
+                return $firmaID;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function loadUserDetails($username) {
+            $userdetails_stmt = $this->dbConn->prepare("SELECT * FROM `person` WHERE `username` = ?");
+            $userdetails_stmt->bind_param("s", $username);
+            $userdetails_stmt->execute();
+
+            $userdetails_result = $userdetails_stmt->get_result();
+
+            if($userdetails_result->num_rows == 1) {
+                $userdetails_object = $userdetails_result->fetch_object();
+
+                $benutzerID = $userdetails_object->id;
+                $vorname = $userdetails_object->vorname;
+                $nachname = $userdetails_object->nachname;
+                $email = $userdetails_object->email;
+
+                $userDetails = new userObjekt($benutzerID, $vorname, $nachname, $email, null, null);
+
+                return $userDetails;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function loadUserAddress($username) {
+            $useraddressid_stmt = $this->dbConn->prepare("SELECT `anschriftID` FROM `person` WHERE `username` = ?");
+            $useraddressid_stmt->bind_param("s", $username);
+            $useraddressid_stmt->execute();
+
+            $useraddressid_stmt->bind_result($anschriftID);
+            $useraddressid_stmt->fetch();
+            $useraddressid_stmt->close();
+
+
+            $useraddress_stmt = $this->dbConn->prepare("SELECT * FROM `anschrift` WHERE `anschriftID` = ?");
+            $useraddress_stmt->bind_param("i", $anschriftID);
+            $useraddress_stmt->execute();
+
+            $useraddress_result = $useraddress_stmt->get_result();
+            
+            if($useraddress_result->num_rows == 1) {
+                $useraddress_object = $useraddress_result->fetch_object();
+
+                $ort = $useraddress_object->ort;
+                $strasse = $useraddress_object->strasse;
+                $plz = $useraddress_object->plz;
+
+                $userAnschrift = new anschriftObjekt($ort, $strasse, null, $plz);
+
+                return $userAnschrift;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function loadUserCompany($username) {
+            $firmaid_stmt = $this->dbConn->prepare("SELECT `firmaID` FROM `person` WHERE `username` = ?");
+            $firmaid_stmt->bind_param("s", $username);
+            $firmaid_stmt->execute();
+
+            $firmaid_stmt->bind_result($firmaID);
+            $firmaid_stmt->fetch();
+            $firmaid_stmt->close();
+
+
+            $firmaaddressid_stmt = $this->dbConn->prepare("SELECT `anschriftID` FROM `firma` WHERE `firmaID` = ?");
+            $firmaaddressid_stmt->bind_param("i", $firmaID);
+            $firmaaddressid_stmt->execute();
+
+            $firmaaddressid_stmt->bind_result($anschriftID);
+            $firmaaddressid_stmt->fetch();
+            $firmaaddressid_stmt->close();
+
+
+            $firmaaddress_stmt = $this->dbConn->prepare("SELECT * FROM `anschrift` WHERE `anschriftID` = ?");
+            $firmaaddress_stmt->bind_param("i", $anschriftID);
+            $firmaaddress_stmt->execute();
+
+            $firmaaddress_result = $firmaaddress_stmt->get_result();
+            
+            if($firmaaddress_result->num_rows == 1) {
+                $firmaaddress_object = $firmaaddress_result->fetch_object();
+
+                $ort = $firmaaddress_object->ort;
+                $strasse = $firmaaddress_object->strasse;
+                $plz = $firmaaddress_object->plz;
+
+                $firmaAnschrift = new anschriftObjekt($ort, $strasse, $firmaID, $plz);
+
+                return $firmaAnschrift;
+            }
+            else {
+                return -1;
+            }
+        }
+
+
+        public function loadCompanyName($firmaID) {
+            $firmenname_stmt = $this->dbConn->prepare("SELECT `firmenname` FROM `firma` WHERE `firmaID` = ?");
+            $firmenname_stmt->bind_param("i", $firmaID);
+            $firmenname_stmt->execute();
+
+            $firmenname_stmt->bind_result($firmenname);
+            $firmenname_stmt->fetch();
+
+            return $firmenname;
+        }      
+
+        public function getAllPostsByUser($username){
+            $autorID = $this->getUserIDbyUsername($username);
+            // var_dump($autorID);
+            // exit();
+            $getallposts_stmt = $this->dbConn->prepare("SELECT * FROM `beitrag` WHERE autorID = ? ORDER BY `datum` DESC");
+            $getallposts_stmt->bind_param("i",$autorID);
+            $getallposts_stmt->execute();
+            $result = $getallposts_stmt->get_result();
+            
+            $postArray = array();
+            $i = 0;
+            while($zeile = $result->fetch_assoc()) {
+                $titel = $zeile['titel'];
+                $inhalt = $zeile['inhalt'];
+                $datum = $zeile['datum'];
+                $autorID = $zeile['autorID'];
+                $private = $zeile['private'];
+
+                $tmpPost = new postObjekt($titel, $inhalt, $datum,$private, $autorID);
+                $postArray[$i] = $tmpPost;
+                $i++;
+            }
+            
+            return $postArray;
+            
         }
     }
 ?>

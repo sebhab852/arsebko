@@ -320,7 +320,7 @@ function checkAndApplyChanges(username) { // Funktion ist noch nicht fertig
     }
 
     let dataJS = {
-        method: "updateUserInfo",
+        method: "editUser",
         param: {
             anschrift:{
                 ort: editedOrt,
@@ -534,4 +534,212 @@ const getUserByID = async (id) =>{
             
         }
     });
+}
+
+function isUserPartOfCompany(username) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "isUserPartOfCompany", param: username },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+
+            if(response == -1) {
+                var buttonFirma = document.getElementById("tab-button-firma");
+                buttonFirma.disabled = true;
+
+                $(buttonFirma).css("background-color", "darkgrey");
+                $(buttonFirma).css("text-decoration", "line-through");
+            }
+        }
+    });
+}
+
+
+function showProfileContent(id) {
+    var detailsContent = document.getElementById("details-content");
+    var kontaktContent = document.getElementById("kontakt-content");
+    var firmaContent = document.getElementById("firma-content");
+    
+    if(id == "tab-button-details") {
+        $(detailsContent).show();
+        $(kontaktContent).hide();
+        $(firmaContent).hide();
+    }
+    else if(id == "tab-button-kontakt") {
+        $(detailsContent).hide();
+        $(kontaktContent).show();
+        $(firmaContent).hide();
+    }
+    else if(id == "tab-button-firma") {
+        $(detailsContent).hide();
+        $(kontaktContent).hide();
+        $(firmaContent).show();
+    }
+}
+
+
+function loadUserDetails(username) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "loadUserDetails", param: username },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+
+            if(response != -1) {
+                $('#details-userid').append(response['id']);
+                $('#details-firstname').append(response['firstname']);
+                $('#details-lastname').append(response['lastname']);
+                $('#details-email').append(response['email']);
+            }
+        }
+    });
+}
+
+
+function loadUserAddress(username) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "loadUserAddress", param: username },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+
+            $('#kontakt-strasse').append(response['strasse']);
+            $('#kontakt-ort').append(response['ort']);
+            $('#kontakt-plz').append(response['plz']);
+        }
+    });
+}
+
+
+function loadUserCompany(username) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "loadUserCompany", param: username },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+
+            $('#firma-strasse').append(response['strasse']);
+            $('#firma-ort').append(response['ort']);
+            $('#firma-plz').append(response['plz']);
+
+            var firmaID = response['hausnummer'];
+            loadCompanyName(firmaID);
+        }
+    });
+}
+
+
+function loadCompanyName(firmaID) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "loadCompanyName", param: firmaID },
+        dataType: "json",
+        success: function(response) {
+            // console.log(response);
+            
+            var firmenname = response;
+            $('#firma-firmenname').append(firmenname);
+        }
+    });
+}
+
+function getAllPostsByUser(username){
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "getAllPostsByUser", param: username },
+        dataType: "json",
+        success: function(response) {
+            //console.log(response);
+            printPostsForUser(response);
+        }
+    });
+}
+
+const printPostsForUser = async(response) => {
+    if(response.length <= 0){
+        var postsMainContainer = document.getElementById("userposts-main-container");
+        var postContainer = document.createElement("h2");
+        $(postContainer).attr("class", "text-center");
+        $(postContainer).text("Es existieren noch keine Beiträge!");
+        
+        postsMainContainer.appendChild(postContainer);
+    }
+    else {
+        for(let x=0; x<response.length; x++) {
+            var titel = response[x]['titel'];
+            var inhalt = response[x]['inhalt'];
+            var datum = response[x]['datum'];
+            var autorID = response[x]['autorID'];
+            let private = response[x]['private'];
+    
+            if((activeUser == null && private == 0) || activeUser != null){
+    
+                var postsMainContainer = document.getElementById("userposts-main-container");
+                var postContainer = document.createElement("div");
+                $(postContainer).attr("id", "post-container");
+                $(postContainer).attr("class", "container rounded");
+    
+    
+                console.log(response[x]['private']);
+                var autorName;
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: "./servicehandler.php",
+                    cache: false,
+                    data: { method: "getUserByID", param: {id: autorID}},
+                    dataType: "json",
+                    success: function(res) {
+                        autorName = res.username;
+                        
+                    }
+                });
+    
+                var breakLine = document.createElement("br");
+                var horizontalLine = document.createElement("hr");
+                
+                var h2 = document.createElement("h2");
+                $(h2).text(""+titel+"");
+    
+                var h6 = document.createElement("h6");
+                $(h6).text("Autor: "+autorName+"");
+    
+                var smallText = document.createElement("small");
+                $(smallText).text("Hochgeladen am: "+datum+"");
+    
+                var p = document.createElement("p");
+                $(p).attr("class", "post-content");
+                $(p).text(""+inhalt+"");
+    
+                $(postContainer).append(breakLine);
+                $(postContainer).append(h2);
+                $(postContainer).append(h6);
+                $(postContainer).append(smallText);
+                $(postContainer).append(horizontalLine);
+                $(postContainer).append(breakLine);
+                $(postContainer).append(p);
+                $(postContainer).append(breakLine);
+    
+                $(postsMainContainer).append(postContainer);
+            }
+        }
+    }
+
 }

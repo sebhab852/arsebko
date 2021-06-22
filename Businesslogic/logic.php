@@ -33,8 +33,8 @@
                     $res = $this->dh->getAdressByUsername($param);
                     break;
 
-                case "updateUserInfo":
-                    $res = $this->dh->updateUserInfo($param);
+                case "editUser":
+                    $res = $this->dh->editUser($param);
                     break;
 
                 case "uploadPost":
@@ -52,7 +52,38 @@
                 case "getUserByID":
                     $res = $this->dh->getUserByID($param);
                     break;
-                
+                //new    
+                case "emailCheck":
+                    $res = $this->dh->emailCheck($param);
+                    break;
+
+                case "changePassword":
+                    $res = $this->dh->changePassword($param);
+                    break;
+
+                case "isUserPartOfCompany":
+                    $res = $this->dh->isUserPartOfCompany($param);
+                    break;
+
+                case "loadUserDetails":
+                    $res = $this->dh->loadUserDetails($param);
+                    break;
+
+                case "loadUserAddress":
+                    $res = $this->dh->loadUserAddress($param);
+                    break;
+
+                case "loadUserCompany":
+                    $res = $this->dh->loadUserCompany($param);
+                    break;
+
+                case "loadCompanyName":
+                    $res = $this->dh->loadCompanyName($param);
+                    break;
+
+                case "getAllPostsByUser":
+                    $res = $this->dh->getAllPostsByUser($param);
+                    break;
                 default:
                     $res = null;
                     break;
