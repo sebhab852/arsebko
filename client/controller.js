@@ -6,6 +6,10 @@ $(document).ready(function () {
     //getUsers();
     $("#submitRegisterSingleUser").attr("onclick","regsiterSingleUser()");
     $("#registerBuisnessButton").attr("onclick","registerBusiness()");
+
+    $('#details-content').show();
+    $('#kontakt-content').hide();
+    $('#firma-content').hide();
 });
 
 $(document).ready(function () {
@@ -535,6 +539,66 @@ const getUserByID = async (id) =>{
         }
     });
 }
+
+
+function changePasswordCheck() {
+    var email = $('#newPassEmail').val();
+    var newPassword = $('#newPassPassword').val();
+    var newPasswordVerification = $('#newPassVerification').val();
+
+    
+    if(email == '' || newPassword == '' || newPasswordVerification == '') {
+        alert("Bitte füllen Sie alle Felder aus!");
+        return;
+    }
+
+    if(newPassword === newPasswordVerification) {
+        $.ajax({
+            type: "POST",
+            url: "./servicehandler.php",
+            cache: false,
+            data: { method: "emailCheck", param: email },
+            dataType: "json",
+            success: function(response) {
+                // console.log(response);
+
+                if(response == -1) {
+                    alert("Bitte geben Sie eine gültige E-Mail-Adresse ein!");
+                }
+                else {
+                    changePassword(email, newPassword);
+                }
+            }
+        });
+    }
+    else {
+        alert("Die Passwörter stimmen nicht überein!");
+
+        return;
+    }
+}
+
+
+function changePassword(email, password) {
+    $.ajax({
+        type: "POST",
+        url: "./servicehandler.php",
+        cache: false,
+        data: { method: "changePassword", param: {"email":""+email+"", "password":""+password+""} },
+        dataType: "json",
+        success: function(response) {
+            console.log(response)
+
+            if(response == email) {
+                window.location.replace("./index.php?page=login");
+            }
+            else {
+                alert("Passwort ändern fehlgeschlagen! Bitte versuchen Sie es später erneut.");
+            }
+        }
+    });
+}
+
 
 function isUserPartOfCompany(username) {
     $.ajax({

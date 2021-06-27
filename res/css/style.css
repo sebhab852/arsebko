@@ -204,3 +204,10 @@ nav.navbar {
 #label-new-post {
     font-weight: bold;
 }
+
+
+#tab-text {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1em;
+}

@@ -84,6 +84,7 @@
                 case "getAllPostsByUser":
                     $res = $this->dh->getAllPostsByUser($param);
                     break;
+                
                 default:
                     $res = null;
                     break;

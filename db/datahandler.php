@@ -293,15 +293,27 @@
             $getuserid_stmt->close();
             
             
-            $postDate = date('d.m.Y');
+            // $postDate = date('d.m.Y');
+            // if($firmaID == -2) {
+            //     $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`) VALUES (?,?,?,?,?)");
+            //     $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate,$postPrivacy, $userID);
+            //     $newpost_stmt->execute();
+            // }
+            // else {
+            //     $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`, `firmaID`) VALUES (?, ?, ?, ?, ?, ?)");
+            //     $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate, $postPrivacy,$userID, $firmaID);
+            //     $newpost_stmt->execute();
+            // }
+            
+            // $postDate = date('d.m.Y');
             if($firmaID == -2) {
-                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`) VALUES (?,?,?,?,?)");
-                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate,$postPrivacy, $userID);
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `private `autorID`) VALUES (?, ?, NOW(), ?, ?)");
+                $newpost_stmt->bind_param("sssi", $postTitle, $postContent, $postPrivacy, $userID);
                 $newpost_stmt->execute();
             }
             else {
-                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`,`datum`, `private`,`autorID`, `firmaID`) VALUES (?, ?, ?, ?, ?, ?)");
-                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postDate, $postPrivacy,$userID, $firmaID);
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `private`, `autorID`, `firmaID`) VALUES (?, ?, NOW(), ?, ?, ?)");
+                $newpost_stmt->bind_param("sssii", $postTitle, $postContent, $postPrivacy, $userID, $firmaID);
                 $newpost_stmt->execute();
             }
             

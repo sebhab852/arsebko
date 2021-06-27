@@ -1,18 +1,22 @@
 <section id="newpassword">
 	<div class="container-fluid mt-4 px-4">
 		<div class="container rounded">
-			<form class="text-center border border-light p-5 bg-logindiv" action="index.php?action=login" method="POST">
-				<p class="h4 mb-4">Passwort ändern</p>
+			<div class="text-center border border-light p-5 bg-logindiv">
+				<p id="changePassTitle" class="h4 mb-4">Passwort ändern</p>
 				<div class="form-row mb-2">
-					<input type="password" class="form-control mb-4" name="newPass" placeholder="Neues Passwort" required>
+					<input id="newPassEmail" type="email" class="form-control mb-4" name="email" placeholder="E-Mail-Adresse" required>
+				</div>
+				
+				<div class="form-row mb-2">
+					<input id="newPassPassword" type="password" class="form-control mb-4" name="newPass" placeholder="Neues Passwort" required>
 				</div>
 				
                 <div class="form-row mb-2">
-					<input type="password" class="form-control mb-4" name="newPassVerification" placeholder="Neues Passwort wiederholen" required>
+					<input id="newPassVerification" type="password" class="form-control mb-4" name="newPassVerification" placeholder="Neues Passwort wiederholen" required>
 				</div>
 
 				
-                <input type="submit" name="submit" value="Passwort ändern" class="btn btn-primary">
+                <input type="submit" name="submit" value="Passwort ändern" class="btn btn-primary" onclick=changePasswordCheck()>
 				<input type="reset" name="reset" value="Abbrechen" class="btn btn-danger">
 				
 				
@@ -32,7 +36,7 @@
 						}
 					?>
 				</div>
-			</form>
+			</div><!-- </form> -->
 		</div>
 	</div>
 </section>
