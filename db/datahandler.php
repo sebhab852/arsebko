@@ -5,6 +5,7 @@
     require_once("./model/company.class.php");
     require_once("./model/address.class.php");
     require_once("./model/post.class.php");
+    require_once("./model/kommentar.class.php");
     
     
     class DataHandler {
@@ -345,13 +346,14 @@
             $postArray = array();
             $i = 0;
             while($zeile = $result->fetch_array()) {
+                $postid = $zeile['beitragID'];
                 $titel = $zeile['titel'];
                 $inhalt = $zeile['inhalt'];
                 $datum = $zeile['datum'];
                 $autorID = $zeile['autorID'];
                 $private = $zeile['private'];
 
-                $tmpPost = new postObjekt($titel, $inhalt, $datum,$private, $autorID);
+                $tmpPost = new postObjekt($postid, $titel, $inhalt, $datum,$private, $autorID);
                 $postArray[$i] = $tmpPost;
                 $i++;
             }
@@ -548,13 +550,14 @@
             $postArray = array();
             $i = 0;
             while($zeile = $result->fetch_assoc()) {
+                $postid = $zeile['beitragID'];
                 $titel = $zeile['titel'];
                 $inhalt = $zeile['inhalt'];
                 $datum = $zeile['datum'];
                 $autorID = $zeile['autorID'];
                 $private = $zeile['private'];
 
-                $tmpPost = new postObjekt($titel, $inhalt, $datum,$private, $autorID);
+                $tmpPost = new postObjekt($postid, $titel, $inhalt, $datum,$private, $autorID);
                 $postArray[$i] = $tmpPost;
                 $i++;
             }
@@ -568,6 +571,57 @@
             // $deleteprofile_stmt = $this->dbConn->prepare("DELETE FROM `person` WHERE `username` = ?");
             // $deleteprofile_stmt->bind_param("s", $username);
             // $deleteprofile_stmt->execute();
+        }
+
+        public function getCommentsForPost($postID){
+            $getcomments_stmt = $this->dbConn->prepare("SELECT * FROM `kommentar` WHERE postID = ? ORDER BY `datum` DESC");
+            $getcomments_stmt->bind_param("i",$postID);
+            $getcomments_stmt->execute();
+            $res  =$getcomments_stmt->get_result();
+            $comments = array();
+            $i = 0;
+            while($z = $res->fetch_assoc()){
+                $tmpComment = new kommentarObjekt($z['kommentarID'],$z['autorID'],$z['postID'],$z['datum'],$z['inhalt']);
+                $comments[$i] = $tmpComment;
+                $i++;
+            }
+            if(empty($comments)){
+                return -1;
+            }
+            return $comments;
+        }
+
+        public function getSinglePost($postID){
+            $comments = $this->getCommentsForPost($postID);
+            $poststmt = $this->dbConn->prepare("SELECT * FROM `beitrag` WHERE beitragID = ?");
+            $poststmt->bind_param("i",$postID);
+            $poststmt->execute();
+            $res = $poststmt->get_result();
+            $res = $res->fetch_object();
+
+            $postid = $res->beitragID;
+            $titel = $res->titel;
+            $inhalt = $res->inhalt;
+            $datum = $res->datum;
+            $autorID = $res->autorID;
+            $private = $res->private;
+
+            $postObject = new postObjekt($postid,$titel,$inhalt,$datum,$private,$autorID);
+
+            $returnArray[0] = $comments;
+            $returnArray[1] = $postObject;
+
+            return $returnArray;
+        }
+
+        public function postComment($param){
+            $autorid = $this->getUserIDbyUsername($param["autorName"]);
+            $stmt = $this->dbConn->prepare("INSERT INTO `kommentar` (`autorID`,`postID`,`datum`, `inhalt`) VALUES (?,?,NOW(),?)");
+            $stmt->bind_param("iis", $autorid, $param["postID"], $param["inhalt"]);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+            
         }
     }
 ?>

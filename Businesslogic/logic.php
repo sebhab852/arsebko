@@ -88,6 +88,14 @@
                 case "deleteProfile":
                     $res = $this->dh->deleteProfile($param);
                     break;
+
+                case "getSinglePost":
+                    $res = $this->dh->getSinglePost($param);
+                    break;
+
+                case "postComment":
+                    $res = $this->dh->postComment($param);
+                    break;
                 
                 default:
                     $res = null;

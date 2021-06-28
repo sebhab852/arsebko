@@ -2,6 +2,7 @@
 
     
     class postObjekt {
+        public $postid;
         public $titel;
         public $inhalt;
         public $datum;
@@ -10,7 +11,8 @@
 
 
         
-        public function __construct($titel, $inhalt, $datum, $private,$autorID) {
+        public function __construct($postid, $titel, $inhalt, $datum, $private,$autorID) {
+            $this->postid = $postid;
             $this->setTitel($titel);
             $this->setInhalt($inhalt);
             $this->setDatum($datum);
@@ -18,6 +20,9 @@
             $this->setAutorID($autorID);
         }
 
+        public function getPostID(){
+            return $this->postid;
+        }
 
         public function getPrivacy(){
             return $this->private;
