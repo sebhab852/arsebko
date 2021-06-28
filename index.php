@@ -81,6 +81,10 @@ EOT; //bitte Einrueckung so lassen
                         case 'editprofile':
                             include "inc/editprofile.php";
                         break;
+
+                        case 'deleteprofile':
+                            include "inc/deleteprofile.php";
+                        break;
                     }
                 }
                 else {

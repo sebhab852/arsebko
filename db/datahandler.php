@@ -307,7 +307,7 @@
             
             // $postDate = date('d.m.Y');
             if($firmaID == -2) {
-                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `private `autorID`) VALUES (?, ?, NOW(), ?, ?)");
+                $newpost_stmt = $this->dbConn->prepare("INSERT INTO `beitrag` (`titel`, `inhalt`, `datum`, `private`, `autorID`) VALUES (?, ?, NOW(), ?, ?)");
                 $newpost_stmt->bind_param("sssi", $postTitle, $postContent, $postPrivacy, $userID);
                 $newpost_stmt->execute();
             }
@@ -561,6 +561,13 @@
             
             return $postArray;
             
+        }
+
+
+        public function deleteProfile($username) {
+            // $deleteprofile_stmt = $this->dbConn->prepare("DELETE FROM `person` WHERE `username` = ?");
+            // $deleteprofile_stmt->bind_param("s", $username);
+            // $deleteprofile_stmt->execute();
         }
     }
 ?>

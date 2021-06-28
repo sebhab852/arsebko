@@ -807,3 +807,20 @@ const printPostsForUser = async(response) => {
     }
 
 }
+
+
+function deleteProfile(username) {
+    console.log("skrraaa user got rekt");
+    
+    // $.ajax({
+    //     async: false,
+    //     type: "POST",
+    //     url: "./servicehandler.php",
+    //     cache: false,
+    //     data: { method: "deleteProfile", param: username },
+    //     dataType: "json",
+    //     success: function(response) {
+    //         console.log(response);
+    //     }
+    // });
+}

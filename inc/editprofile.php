@@ -33,7 +33,7 @@
                 <label for="plz" class="ms-1">PLZ</label>
                 <input id="edituser-plz" type="text" class="form-control" name="plz" placeholder="PLZ">
                 <br>
-                <a href="./index.php" class="btn btn-danger w-100">Profil löschen</a>
+                <a href="./index.php?page=deleteprofile" class="btn btn-danger w-100">Profil löschen</a>
             </div>
         </div>
 

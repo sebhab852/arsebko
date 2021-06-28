@@ -84,6 +84,10 @@
                 case "getAllPostsByUser":
                     $res = $this->dh->getAllPostsByUser($param);
                     break;
+
+                case "deleteProfile":
+                    $res = $this->dh->deleteProfile($param);
+                    break;
                 
                 default:
                     $res = null;
