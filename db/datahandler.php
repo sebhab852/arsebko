@@ -96,12 +96,18 @@
             $result2 = $this->dbConn->query($stmt4);
             $id2 = $result2->fetch_all();
 
-
-
             $stmtInterlude = $this->dbConn->prepare("INSERT INTO firma (`firmenname`,`kontaktpersonID`,`anschriftID`) VALUES(?,?,?)");
             $stmtInterlude->bind_param("sii",$firmaName,$id2[0][0],$id[0][0]);
             $stmtInterlude->execute();
             $stmtInterlude->close();
+
+            $stmt5 = "SELECT MAX(firmaID) FROM `firma`";
+            $result3 = $this->dbConn->query($stmt5);
+            $id3 = $result3->fetch_all();
+
+            $firma_person_statement = $this->dbConn->prepare("UPDATE `person` SET `firmaID` = ? WHERE id = ?");
+            $firma_person_statement->bind_param("ii",$id3[0][0],$id2[0][0]);
+            $firma_person_statement->execute();
 
             return true;
 
